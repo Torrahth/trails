@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"c:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/PlayerFerret.png","c:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/bin/DesktopGL/Content/PlayerFerret.xnb","TextureProcessor","Texture2DContent",207,477,0.1087441
+"c:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/TileAtlas.png","c:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/bin/DesktopGL/Content/TileAtlas.xnb","TextureProcessor","Texture2DContent",864,4181,0.0031788
