@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -25,10 +26,12 @@ public class Player : Object
 
         Camera.SetPosition(Position);
 
-        int player_tile_x = ((int)Position.X  / 8)+ (Global.current_world._sizeX/2);
-         int player_tile_y = ((int)Position.Y/ 8) +(Global.current_world._sizeY/2);
+        Vector2 mouse_pos = (Mouse.GetState().Position.ToVector2()/ 8) * Camera.GetZoom();
+        int player_tile_x = (int)mouse_pos.X ; //((int)Position.X  / 8)+ (Global.current_world._sizeX/2);
+         int player_tile_y = (int)mouse_pos.Y ; //((int)Position.Y/ 8) +(Global.current_world._sizeY/2);
 
-        Global.current_world.SetTile(player_tile_x, player_tile_y, TileID.Tile_brick);
+        if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            Global.current_world.SetTile(player_tile_x, player_tile_y, TileID.Tile_brick);
     }
   
 }

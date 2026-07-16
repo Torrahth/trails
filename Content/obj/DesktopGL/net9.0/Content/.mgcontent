@@ -4,8 +4,8 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>c:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/PlayerFerret.png</File>
-    <File>c:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/TileAtlas.png</File>
+    <File>C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/PlayerFerret.png</File>
+    <File>C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/TileAtlas.png</File>
   </SourceFiles>
   <DestFiles>
     <File>PlayerFerret.png</File>

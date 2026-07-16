@@ -46,7 +46,7 @@ public class Game1 : Game
     }
     public void Setup()
     {
-        world = new World(62*32,62*32, TileAtlas);
+        world = new World(4*32,4*32, TileAtlas);
         player = new Player(Player_asset);
         Global.current_world = world;
     }
@@ -72,11 +72,14 @@ public class Game1 : Game
           frame_counter = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        _spriteBatch.Begin();
+        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
         world.DrawChunks(_spriteBatch);//_spriteBatch.Draw(TileAtlas, TileAtlas.Bounds, Color.Bisque);
-        player.Draw(_spriteBatch);
+       
         _spriteBatch.End();
-
+        
+          _spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
+         player.Draw(_spriteBatch);
+        _spriteBatch.End();
         // TODO: Add your drawing code here
 
         base.Draw(gameTime);

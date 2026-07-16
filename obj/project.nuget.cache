@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BCeWT34YfRA=",
+  "dgSpecHash": "5EfgdhXAdLE=",
   "success": true,
-  "projectFilePath": "c:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
+  "projectFilePath": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gorri\\.nuget\\packages\\monogame.content.builder.task\\3.8.4.1\\monogame.content.builder.task.3.8.4.1.nupkg.sha512",
     "C:\\Users\\gorri\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.4.1\\monogame.framework.desktopgl.3.8.4.1.nupkg.sha512",

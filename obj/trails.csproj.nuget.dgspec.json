@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj": {}
+    "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj": {}
   },
   "projects": {
-    "c:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj": {
+    "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
+        "projectUniqueName": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
         "projectName": "trails",
-        "projectPath": "c:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
+        "projectPath": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
         "packagesPath": "C:\\Users\\gorri\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\obj\\",
+        "outputPath": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\gorri\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
