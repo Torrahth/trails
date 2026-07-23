@@ -21,9 +21,11 @@ public class Game1 : Game
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
-       
+        
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+        Window.AllowUserResizing = true;
+
         Camera.Init(Window);
     }
 
@@ -46,7 +48,7 @@ public class Game1 : Game
     }
     public void Setup()
     {
-        world = new World(4*32,4*32, TileAtlas);
+        world = new World(12*32,12*32, TileAtlas);
         player = new Player(Player_asset);
         Global.current_world = world;
     }

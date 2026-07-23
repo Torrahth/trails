@@ -26,7 +26,7 @@ public class Player : Object
 
         Camera.SetPosition(Position);
 
-        Vector2 mouse_pos = (Mouse.GetState().Position.ToVector2()/ 8) * Camera.GetZoom();
+        Vector2 mouse_pos = ((Mouse.GetState().Position.ToVector2() + new Vector2(-Camera.GetViewport().X, Camera.GetViewport().Y)) / 8) + Position / 8;//     * Camera.GetZoom()) + ( Camera.GetPosition() / 8) ;
         int player_tile_x = (int)mouse_pos.X ; //((int)Position.X  / 8)+ (Global.current_world._sizeX/2);
          int player_tile_y = (int)mouse_pos.Y ; //((int)Position.Y/ 8) +(Global.current_world._sizeY/2);
 

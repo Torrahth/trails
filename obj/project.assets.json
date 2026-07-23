@@ -2,18 +2,18 @@
   "version": 4,
   "targets": {
     "net9.0": {
-      "MonoGame.Content.Builder.Task/3.8.4.1": {
+      "MonoGame.Content.Builder.Task/3.8.5": {
         "type": "package",
         "build": {
           "build/MonoGame.Content.Builder.Task.props": {},
           "build/MonoGame.Content.Builder.Task.targets": {}
         }
       },
-      "MonoGame.Framework.DesktopGL/3.8.4.1": {
+      "MonoGame.Framework.DesktopGL/3.8.5": {
         "type": "package",
         "dependencies": {
-          "MonoGame.Library.OpenAL": "1.24.3.2",
-          "MonoGame.Library.SDL": "2.32.2.1",
+          "MonoGame.Library.OpenAL": "1.24.3.4",
+          "MonoGame.Library.SDL": "2.32.10.2",
           "NVorbis": "0.10.4"
         },
         "compile": {
@@ -30,7 +30,7 @@
           "build/MonoGame.Framework.DesktopGL.targets": {}
         }
       },
-      "MonoGame.Library.OpenAL/1.24.3.2": {
+      "MonoGame.Library.OpenAL/1.24.3.4": {
         "type": "package",
         "runtimeTargets": {
           "runtimes/android-arm/native/libopenal.so": {
@@ -73,15 +73,23 @@
             "assetType": "native",
             "rid": "osx"
           },
+          "runtimes/win-arm64/native/openal.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
           "runtimes/win-x64/native/openal.dll": {
             "assetType": "native",
             "rid": "win-x64"
           }
         }
       },
-      "MonoGame.Library.SDL/2.32.2.1": {
+      "MonoGame.Library.SDL/2.32.10.2": {
         "type": "package",
         "runtimeTargets": {
+          "runtimes/linux-arm64/native/libSDL2-2.0.so.0": {
+            "assetType": "native",
+            "rid": "linux-arm64"
+          },
           "runtimes/linux-x64/native/libSDL2-2.0.so.0": {
             "assetType": "native",
             "rid": "linux-x64"
@@ -89,6 +97,10 @@
           "runtimes/osx/native/libSDL2-2.0.0.dylib": {
             "assetType": "native",
             "rid": "osx"
+          },
+          "runtimes/win-arm64/native/SDL2.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
           },
           "runtimes/win-x64/native/SDL2.dll": {
             "assetType": "native",
@@ -134,24 +146,24 @@
     }
   },
   "libraries": {
-    "MonoGame.Content.Builder.Task/3.8.4.1": {
-      "sha512": "jf6IZXMiOhuybRaWQt//u+804yzMRGk3ZRvlBJG/0iusRwTunJsQvA6tMMJJc7gjUrY6rUkzRqwinKWXugyHfA==",
+    "MonoGame.Content.Builder.Task/3.8.5": {
+      "sha512": "J+iCTYSkmQLI5WMVxJ/PSidUesd/A3izDVn8JlUTlMrBI/hOeGjGSIux497zVWlNGlmvoIWDunKTwRbkAXYFHA==",
       "type": "package",
-      "path": "monogame.content.builder.task/3.8.4.1",
+      "path": "monogame.content.builder.task/3.8.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "build/MonoGame.Content.Builder.Task.props",
         "build/MonoGame.Content.Builder.Task.targets",
-        "monogame.content.builder.task.3.8.4.1.nupkg.sha512",
+        "monogame.content.builder.task.3.8.5.nupkg.sha512",
         "monogame.content.builder.task.nuspec"
       ]
     },
-    "MonoGame.Framework.DesktopGL/3.8.4.1": {
-      "sha512": "YybxIIT5+Ky78E/XdkS0glyluMr2EeDZwx2LqXULAOCqiKt1+aDrjPZaqLL5qpNgBcMEHUeZJ4YjWe4TAZlWLw==",
+    "MonoGame.Framework.DesktopGL/3.8.5": {
+      "sha512": "oG5Thkic4i/6kX3OWtq2p6DEATflP71yM0p/1ymIoFaIp1xNFOqAd4jW2D9GIQLIMT6mn5RmJknYPqJnOQbi5w==",
       "type": "package",
-      "path": "monogame.framework.desktopgl/3.8.4.1",
+      "path": "monogame.framework.desktopgl/3.8.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -160,21 +172,21 @@
         "build/MonoGame.Framework.DesktopGL.targets",
         "lib/net8.0/MonoGame.Framework.dll",
         "lib/net8.0/MonoGame.Framework.xml",
-        "monogame.framework.desktopgl.3.8.4.1.nupkg.sha512",
+        "monogame.framework.desktopgl.3.8.5.nupkg.sha512",
         "monogame.framework.desktopgl.nuspec"
       ]
     },
-    "MonoGame.Library.OpenAL/1.24.3.2": {
-      "sha512": "nGRsXQXs+NSUC3C5w90hFQfyKdZPpBnHnyg2w+Dw/2pUH7s+CoRWTJNYbzzdJf3+aeUvfvG4rTbFvMKDDj5olA==",
+    "MonoGame.Library.OpenAL/1.24.3.4": {
+      "sha512": "/FhE0hblY9owGPvIHnMbH+6kXtjfl+/t3Cm776RQiZnGyxGy2Qd9pTAzclLuMO8pvtjiGLYkkRwjRciUA4XFyQ==",
       "type": "package",
-      "path": "monogame.library.openal/1.24.3.2",
+      "path": "monogame.library.openal/1.24.3.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE",
         "README.md",
-        "monogame.library.openal.1.24.3.2.nupkg.sha512",
+        "monogame.library.openal.1.24.3.4.nupkg.sha512",
         "monogame.library.openal.nuspec",
         "runtimes/android-arm/native/libopenal.so",
         "runtimes/android-arm64/native/libopenal.so",
@@ -186,23 +198,26 @@
         "runtimes/linux-arm64/native/libopenal.so",
         "runtimes/linux-x64/native/libopenal.so",
         "runtimes/osx/native/libopenal.dylib",
+        "runtimes/win-arm64/native/openal.dll",
         "runtimes/win-x64/native/openal.dll"
       ]
     },
-    "MonoGame.Library.SDL/2.32.2.1": {
-      "sha512": "T4E2ppGlSTC2L9US1rxtdg3qTbarRzNId31xZoumUW9cf9Nq8nRQPMu9GzvZGrhfSySf0+UWPEj1rlicps+P/w==",
+    "MonoGame.Library.SDL/2.32.10.2": {
+      "sha512": "mtnmWr50KgH2Ui9fPscHPMI3sXgb5NBRnPS7igi4ViJ23ROdP+MLi/j9CmLWX47KuXvI3Bp5BElCDVwRUlswgg==",
       "type": "package",
-      "path": "monogame.library.sdl/2.32.2.1",
+      "path": "monogame.library.sdl/2.32.10.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.txt",
         "README.md",
-        "monogame.library.sdl.2.32.2.1.nupkg.sha512",
+        "monogame.library.sdl.2.32.10.2.nupkg.sha512",
         "monogame.library.sdl.nuspec",
+        "runtimes/linux-arm64/native/libSDL2-2.0.so.0",
         "runtimes/linux-x64/native/libSDL2-2.0.so.0",
         "runtimes/osx/native/libSDL2-2.0.0.dylib",
+        "runtimes/win-arm64/native/SDL2.dll",
         "runtimes/win-x64/native/SDL2.dll"
       ]
     },
@@ -301,11 +316,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
+      "projectUniqueName": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
       "projectName": "trails",
-      "projectPath": "c:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
+      "projectPath": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
       "packagesPath": "C:\\Users\\gorri\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\obj\\",
+      "outputPath": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Users\\gorri\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
@@ -369,19 +384,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[9.0.17, 9.0.17]"
+            "version": "[9.0.18, 9.0.18]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[9.0.17, 9.0.17]"
+            "version": "[9.0.18, 9.0.18]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.17, 9.0.17]"
+            "version": "[9.0.18, 9.0.18]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[9.0.17, 9.0.17]"
+            "version": "[9.0.18, 9.0.18]"
           }
         ],
         "frameworkReferences": {
@@ -389,7 +404,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
