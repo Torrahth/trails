@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 using trails.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using TorraFramework.Core;
 
 namespace trails.Script;
 
@@ -46,6 +47,10 @@ public class World
         }
           world[x, y] =  tile_type;
     }
+    public Tile GetTile(int x, int y)
+    {
+        return world[x, y];
+    }
     public void Update()
     {
          chunks.Update();
@@ -66,7 +71,7 @@ public class World
                 Tile C_tile = chunk.chunk[x, y];
                 Vector2 position = new Vector2(x, y)  * 8+  new Vector2(32, 32)* chunk.GetCoords()*8+new Vector2(8, 8);
 
-                spriteBatch.Draw(texture, (position - Camera.GetPosition()) * camera_zoom +Camera.GetViewport(), C_tile.texture_bounds, Color.White, 0, origin, camera_zoom, SpriteEffects.FlipHorizontally, 1.0f);
+                spriteBatch.Draw(texture, (position - Camera.GetPosition()) * camera_zoom +Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin, camera_zoom, SpriteEffects.FlipHorizontally, 1.0f);
             }
         }
         }
@@ -91,7 +96,7 @@ public class World
 
                 SpriteEffects effects = rng.Next(0, 2) == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-                spriteBatch.Draw(texture, ((position - Camera.GetPosition()) )* Camera.GetZoom() +Camera.GetViewport(), C_tile.texture_bounds, Color.White, 0, origin, Camera.GetZoom(), effects, 1.0f);
+                spriteBatch.Draw(texture, ((position - Camera.GetPosition()) )* Camera.GetZoom() +Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin, Camera.GetZoom(), effects, 1.0f);
 
             }
         }
@@ -113,10 +118,7 @@ public class World
                 {
                     SetTile(X, Y, TileID.Tile_brick);
                 }
-                else if (X ==  _sizeX/2 && Y == _sizeY / 2)
-                {
-                    GenerateRectangle(X, Y, TileID.Tile_crystal, 3,3);
-                }
+               
                 else if (Y < _sizeY / 3)
                 {
                       if (rng.Next(0, 2) == 0)
@@ -127,10 +129,16 @@ public class World
                 
             } 
         }
-        SetTile(_sizeX/2, _sizeY/2, TileID.Tile_brick);
+        GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_crystal, 3 * (_sizeX * 0.05f), 3* (_sizeX * 0.05f));
+        GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_Water, 1 * (_sizeX * 0.05f), 1* (_sizeX * 0.05f));
+
     }
-    void GenerateRectangle(int x, int y, Tile tile_type, int size_x, int size_y)
+    void GenerateRectangle(int x, int y, Tile tile_type, float size_x, float size_y)
     {
+
+        size_x = (int)Math.Floor(size_x);
+        size_y = (int)Math.Floor(size_y);
+
         for (int X = 0; X < size_x; X++)
         {
             for (int Y = 0; Y < size_y; Y++)
@@ -139,7 +147,6 @@ public class World
                 int _y = y + Y - (int)Math.Floor(size_y * 0.5f);
 
                 SetTile(_x, _y, tile_type);
-                Console.WriteLine("generated a tile at: " + new Vector2(_x, _y));
             }
         }
     }

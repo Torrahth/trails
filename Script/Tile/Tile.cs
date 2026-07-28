@@ -11,6 +11,7 @@ public class Tile
 {
     public int tile_id;
     public Rectangle texture_bounds;
+    public bool Collidable = true;
     //public Texture2D texture;
 
     public void Init(Texture2D new_texture)

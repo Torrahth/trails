@@ -106,3 +106,5 @@ c:\Users\gorri\OneDrive\Documents\trails\trails\trails\obj\Debug\net9.0\ref\trai
 C:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Debug\net9.0\runtimes\win-arm64\native\openal.dll
 C:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Debug\net9.0\runtimes\linux-arm64\native\libSDL2-2.0.so.0
 C:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Debug\net9.0\runtimes\win-arm64\native\SDL2.dll
+C:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Debug\net9.0\TorraFramework.dll
+C:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Debug\net9.0\TorraFramework.pdb

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using trails.Script;
+using TorraFramework.Core;
 
 namespace trails;
 
@@ -18,10 +19,11 @@ public class Game1 : Game
     // CONTENT
     World world;
     Player player;
-    public Game1()
+    public Game1() 
     {
         _graphics = new GraphicsDeviceManager(this);
-        
+        Main.Window = Window;
+
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
         Window.AllowUserResizing = true;
@@ -31,8 +33,6 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
-
         base.Initialize();
     }
 
@@ -48,16 +48,16 @@ public class Game1 : Game
     }
     public void Setup()
     {
-        world = new World(12*32,12*32, TileAtlas);
+        world = new World(4*32,4*32, TileAtlas);
         player = new Player(Player_asset);
         Global.current_world = world;
     }
     protected override void Update(GameTime gameTime)
     {
-       
+        Camera.Update();
+
         player.Update();
         world.Update();
-        Camera.Update();
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 

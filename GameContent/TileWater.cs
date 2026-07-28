@@ -3,12 +3,12 @@ using trails.Script;
 
 namespace trails.GameContent;
 
-public  class TileAir : Tile
+public  class TileWater : Tile
 {
-    public TileAir()
+    public TileWater()
     {
-        tile_id = 0;
-        texture_bounds = new Rectangle(0, 0, 8, 8);
+        tile_id = 4;
+        texture_bounds = new Rectangle(0, 8, 8, 8);
         Collidable = false;
     }
    

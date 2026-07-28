@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using TorraFramework.Core;
 
 namespace trails.Script;
 
@@ -13,13 +14,13 @@ public class ChunkingSystem
 
     Chunk chunk;
 
-    Vector2 TargetPosition = Camera.GetPosition()-Camera.GetViewport();
+    Vector2 TargetPosition = Camera.GetPosition()-Camera.GetHalfViewport();
     int chunk_rad_X = 12;
      int chunk_rad_Y = 10;
     public ChunkingSystem(World world)
     {
          chunk = new Chunk();
-                 Console.WriteLine("gulpss");
+        // Console.WriteLine("gulpss");
 
     }
     public void Update()
@@ -30,7 +31,7 @@ public class ChunkingSystem
 
         TargetPosition = (Camera.GetPosition()   - new Vector2(Global.current_world._sizeX/32, Global.current_world._sizeY/32))/8 ;
         Vector2 TargetChunk = new Vector2((int)Math.Ceiling(TargetPosition.X /pow ),(int)Math.Ceiling(TargetPosition.Y / pow)) ;
-        Console.WriteLine(TargetChunk );
+        //Console.WriteLine(TargetChunk );
 
         for (int x = - chunk_rad_X/2; x < chunk_rad_X/2; ++x)
         {
