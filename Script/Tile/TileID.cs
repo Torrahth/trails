@@ -9,5 +9,9 @@ public static class TileID
     public static Tile Tile_crystal = new TileCrystal();
     public static Tile Tile_brick = new TileBrick();
     public static Tile Tile_Water = new TileWater();
+    public static Tile Sunstone = new TileSunStone();
+
+    public static Tile Sunchain = new TileSunChain();
+
 
 }

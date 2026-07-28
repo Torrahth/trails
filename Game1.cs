@@ -48,12 +48,16 @@ public class Game1 : Game
     }
     public void Setup()
     {
-        world = new World(4*32,4*32, TileAtlas);
+        world = new World(12*32,12*32, TileAtlas);
         player = new Player(Player_asset);
         Global.current_world = world;
     }
     protected override void Update(GameTime gameTime)
     {
+        if (this.IsActive)
+        {
+            
+       
         Camera.Update();
 
         player.Update();
@@ -66,13 +70,13 @@ public class Game1 : Game
         // TODO: Add your update logic here
 
         base.Update(gameTime);
-       
+        }
     }
 
     protected override void Draw(GameTime gameTime)
     {
           frame_counter = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(new Color(225, 232, 255));
 
         _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
         world.DrawChunks(_spriteBatch);//_spriteBatch.Draw(TileAtlas, TileAtlas.Bounds, Color.Bisque);

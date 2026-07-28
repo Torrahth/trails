@@ -119,15 +119,40 @@ public class World
                     SetTile(X, Y, TileID.Tile_brick);
                 }
                
-                else if (Y < _sizeY / 3)
+                else if (Y < _sizeY * 0.33f)
                 {
-                      if (rng.Next(0, 2) == 0)
+                    if (rng.Next(0, 2) == 0)
                       SetTile(X, Y, TileID.Tile_dirt);
                     else
                         SetTile(X, Y, TileID.Tile_air);
+                    
+                    if (X < _sizeX * 0.5f && rng.Next(0, 2) == 0)
+                        SetTile(X, Y, TileID.Tile_crystal);
+
                 }
-                
+                else if (Y > _sizeX * 0.75f)
+                {
+                    if (X < _sizeX * 0.5f)
+                    {
+                    if (rng.Next(0, 136) == 0)
+                        GenerateRectangle(X, Y, TileID.Tile_brick, rng.Next(5, 22) , rng.Next(1, 3));
+                    if (rng.Next(0, 136) == 0)
+                        GenerateRectangle(X, Y - 4, TileID.Sunchain, 1, rng.Next(1, 22));
+                    if (rng.Next(0, 136) == 0)
+                        GenerateRectangle(X, Y, TileID.Sunstone, 1 , 1);
+                    }
+                    else
+                    {
+                        if (rng.Next(0, 12) == 0)
+                            GenerateRectangle(X, Y, TileID.Tile_dirt, 1, rng.Next(1, 42));
+                        else
+                            SetTile(X, Y, TileID.Tile_Water);
+                    }
+                }
+                if (rng.Next(0, 236) == 0)
+                        GenerateRectangle(X, Y, TileID.Tile_dirt, rng.Next(1, 3) , rng.Next(1, 3));
             } 
+            
         }
         GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_crystal, 3 * (_sizeX * 0.05f), 3* (_sizeX * 0.05f));
         GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_Water, 1 * (_sizeX * 0.05f), 1* (_sizeX * 0.05f));
@@ -135,6 +160,7 @@ public class World
     }
     void GenerateRectangle(int x, int y, Tile tile_type, float size_x, float size_y)
     {
+      
 
         size_x = (int)Math.Floor(size_x);
         size_y = (int)Math.Floor(size_y);
@@ -145,6 +171,8 @@ public class World
             {
                 int _x = x + X - (int)Math.Floor(size_x * 0.5f);
                 int _y = y + Y - (int)Math.Floor(size_y * 0.5f);
+                if (!Is_in_world(_x, _y))
+                    return;
 
                 SetTile(_x, _y, tile_type);
             }
