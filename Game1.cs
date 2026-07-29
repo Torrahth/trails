@@ -65,12 +65,9 @@ public class Game1 : GameCore
     {
         frame_counter = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
         GraphicsDevice.Clear(new Color(225, 232, 255));
-
       
         world.DrawChunks(_spriteBatch);//_spriteBatch.Draw(TileAtlas, TileAtlas.Bounds, Color.Bisque);
        
-       
-
         _spriteBatch.Begin();
         EntityManager.Draw(_spriteBatch);
         _spriteBatch.End();
