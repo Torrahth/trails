@@ -12,8 +12,19 @@ public class Player : Entity
     float zoom = 0.0f;
     Tile tile_type = TileID.Tile_dirt;
     float gravity = 0;
+    int max_gravity = 0;
+    int max_horizontal = 0;
+    float jump_height = 0;
     float horizontal_movement = 1.5f;
+    int KT = 0;
+    enum States
+    {
+        Normal,
+        Climbing
+    }
+    States state = States.Normal;
     Entity mouse_cursor = new Entity();
+    Vector2 player_tile = Vector2.Zero;
     public Player(Texture2D _texture)
     {
         texture = _texture;
@@ -21,8 +32,12 @@ public class Player : Entity
     }
     public override void Update()
     {
+        KT--;
         gravity = 0.1f;
+        max_gravity = 12;
         horizontal_movement = 1.5f;
+        max_horizontal = 18;
+        jump_height = 1.8f;
 
         int left =  Keyboard.GetState().IsKeyDown(Keys.Left) ? 1 : 0 ;
         int right =  Keyboard.GetState().IsKeyDown(Keys.Right) ? 1 : 0 ;
@@ -33,44 +48,93 @@ public class Player : Entity
         int horizontal  = left - right;
         int vertical = up - down;
 
-        
+        Collide();
 
-        Vector2 mp = new Vector2((int)Math.Floor(Mouse.GetState().Position.X * 0.125f),(int)Math.Floor(Mouse.GetState().Position.Y * 0.125f));
-        mouse_cursor.Position = new Vector2((int)Math.Floor(  mp.X), (int)Math.Floor( mp.Y)); // + new Vector2(Global.current_world._sizeX, Global.current_world._sizeY) * 0.5f;
-        if (Global.current_world.GetTile((int)mp.X, (int)mp.Y) == TileID.Tile_Water)
+        player_tile = new Vector2((int)Math.Floor(Position.X * 0.125f)+1,(int)Math.Floor(Position.Y * 0.125f)+1);
+        mouse_cursor.Position = new Vector2((int)Math.Floor(  player_tile.X* 8f), (int)Math.Floor( player_tile.Y* 8f)); // + new Vector2(Global.current_world._sizeX, Global.current_world._sizeY) * 0.5f;
+        if (Global.current_world.GetTile((int)player_tile.X, (int)player_tile.Y) == TileID.Tile_Water)
         {
             gravity = 0.02f;
+            max_gravity = 1;
             horizontal_movement = 0.5f;
+            max_horizontal = 6;
+            jump_height = 0.1f;
+            KT = 1;
         }
+        if (Global.current_world.GetTile((int)player_tile.X, (int)player_tile.Y) == TileID.Sunchain)
+        {
+            if (vertical == 1)
+            {
+                state = States.Climbing;
+            }
 
-        if (Collisions.Z == 0)
-        {
-            Velocity.Y += gravity;
         }
+          
+        switch (state)
+        {
+            case States.Normal:
+                {
+                    Movement(horizontal, vertical);
+                }
+                break;
+            case States.Climbing:
+                {
+                    Climbing(horizontal, vertical);
+                }
+                break;
 
-        if (horizontal != 0)
-        {
-            Velocity.X -= Math.Clamp(Velocity.X + horizontal_movement * horizontal, -18, 18) ;
         }
-        else
-        {
-             Velocity.X /= 1.4f;
-        }
-        
-        if (up != 0 && Collisions.Z == 1)
-        {
-            Velocity.Y -= 1.8f;
-        }
-
+    
       
 
-        Collide();
+      
 
         
         Camera.SetPosition(Position);
         TileInteractions();
     
         OldPosition = Position;
+    }
+    private void Climbing(int horizontal, int vertical)
+    {
+        Velocity = Vector2.Zero;   
+        Position.X = player_tile.X * 8 - 4;
+
+        Velocity.Y -= vertical;
+
+        if (horizontal != 0 || Global.current_world.GetTile((int)player_tile.X, (int)player_tile.Y) != TileID.Sunchain)
+        {
+                state = States.Normal;
+        }
+    }
+    private void Movement(int horizontal, int vertical)
+    {
+        if (Collisions.Z == 0)
+        {
+            Velocity.Y += gravity;
+            if (Velocity.Y > max_gravity)
+                Velocity.Y = max_gravity;
+        }
+        else
+        {
+            KT = 5;
+        }
+
+        if (horizontal != 0)
+        {
+            Velocity.X -= Math.Clamp(Velocity.X + horizontal_movement * horizontal, -max_horizontal, max_horizontal) ;
+        }
+        else
+        {
+             Velocity.X /= 1.4f;
+        }
+        
+        if (vertical == 1 &&  KT > 0)
+        {
+            Velocity.Y -= jump_height;
+            KT = 0;
+        }
+
     }
     private void Collide()
     {
