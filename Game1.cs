@@ -7,21 +7,15 @@ using TorraFramework.Core;
 
 namespace trails;
 
-public class Game1 : Game
+public class Game1 : GameCore
 {
-    private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
-
     float frame_counter = 0.0f;
-    // TEXTURE
-    Texture2D TileAtlas;
-    Texture2D Player_asset;
     // CONTENT
     World world;
     Player player;
-    public Game1() 
+
+    public Game1() : base("didy", 1000, 600)
     {
-        _graphics = new GraphicsDeviceManager(this);
         Main.Window = Window;
 
         Content.RootDirectory = "Content";
@@ -30,32 +24,28 @@ public class Game1 : Game
 
         Camera.Init(Window);
     }
-
-    protected override void Initialize()
-    {
-        base.Initialize();
-    }
-
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
         
-        TileAtlas = Content.Load<Texture2D>("TileAtlas");
-        Player_asset = Content.Load<Texture2D>("PlayerFerret");
-
         Setup();
     }
     public void Setup()
     {
-        world = new World(12*32,12*32, TileAtlas);
-        player = new Player(Player_asset);
+        AssetManager.Init(Content, GraphicsDevice, _spriteBatch);
+
+
+        world = new World(32*32,32*32, AssetManager.LoadTexture("TileAtlas", "TileAtlas"));
+
+        player = new Player(AssetManager.LoadTexture("Player", "PlayerFerret"));
+        //Main.entityManager.CreateEntity(player);
+
         Global.current_world = world;
     }
     protected override void Update(GameTime gameTime)
     {
-        if (this.IsActive)
-        {
+        if (!this.IsActive)
+            return;
             
        
         Camera.Update();
@@ -67,26 +57,27 @@ public class Game1 : Game
 
 
          Window.Title = "trails" + frame_counter;
-        // TODO: Add your update logic here
 
         base.Update(gameTime);
-        }
     }
 
     protected override void Draw(GameTime gameTime)
     {
-          frame_counter = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
+        frame_counter = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
         GraphicsDevice.Clear(new Color(225, 232, 255));
 
-        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+      
         world.DrawChunks(_spriteBatch);//_spriteBatch.Draw(TileAtlas, TileAtlas.Bounds, Color.Bisque);
        
+       
+
+        _spriteBatch.Begin();
+        EntityManager.Draw(_spriteBatch);
         _spriteBatch.End();
-        
-          _spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
-         player.Draw(_spriteBatch);
+
+        _spriteBatch.Begin();
+        GuiManager.Draw(_spriteBatch);
         _spriteBatch.End();
-        // TODO: Add your drawing code here
 
         base.Draw(gameTime);
     }

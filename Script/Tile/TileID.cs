@@ -12,6 +12,8 @@ public static class TileID
     public static Tile Sunstone = new TileSunStone();
 
     public static Tile Sunchain = new TileSunChain();
+    public static Tile Fractal = new TileFractal();
+    public static Tile InnermostFractal = new TileInnermostFractal();
 
 
 }

@@ -45,11 +45,11 @@ public class World
         {
             return;
         }
-          world[x, y] =  tile_type;
+        world[x, y] =  tile_type;
     }
     public Tile GetTile(int x, int y)
     {
-        return world[x, y];
+        return world[x + (int)(_sizeX * 0.5f), y + (int)(_sizeY * 0.5f)];
     }
     public void Update()
     {
@@ -57,25 +57,26 @@ public class World
     }
     public void DrawChunks(SpriteBatch spriteBatch)
     {
+        spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
        float camera_zoom = Camera.GetZoom();
-          Vector2 texture_size = texture.Bounds.Size.ToVector2(); 
-                Vector2 origin = new Vector2(texture_size.X, texture_size.Y)/ 2;
+        Vector2 texture_size = texture.Bounds.Size.ToVector2(); 
+        Vector2 origin = new Vector2(texture_size.X, texture_size.Y) * 0.5f;
         foreach (Chunk chunk in chunks.get_chunks())
         {
             for (int x = 0; x < 32; ++x)
             {
-            for (int y = 0; y < 32; y++)
-            {
+                for (int y = 0; y < 32; y++)
+                {
                 //Random rng = new Random(chunk.chunk_ID + x * y);
 
                 Tile C_tile = chunk.chunk[x, y];
                 Vector2 position = new Vector2(x, y)  * 8+  new Vector2(32, 32)* chunk.GetCoords()*8+new Vector2(8, 8);
 
                 spriteBatch.Draw(texture, (position - Camera.GetPosition()) * camera_zoom +Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin, camera_zoom, SpriteEffects.FlipHorizontally, 1.0f);
+                }
             }
         }
-        }
-
+        spriteBatch.End();
         //Camera.GetPosition() / 8 - 
         
     }
@@ -101,10 +102,6 @@ public class World
             }
         }
     }
-    void PrepWorld()
-    {
-        
-    }
     public void GenerateWorld()
     {
          int border = 2;
@@ -127,7 +124,10 @@ public class World
                         SetTile(X, Y, TileID.Tile_air);
                     
                     if (X < _sizeX * 0.5f && rng.Next(0, 2) == 0)
+                    {
                         SetTile(X, Y, TileID.Tile_crystal);
+                       
+                    }
 
                 }
                 else if (Y > _sizeX * 0.75f)
@@ -151,11 +151,20 @@ public class World
                 }
                 if (rng.Next(0, 236) == 0)
                         GenerateRectangle(X, Y, TileID.Tile_dirt, rng.Next(1, 3) , rng.Next(1, 3));
+                if (X > _sizeX * 0.90)
+                    if (rng.Next(0, 1552) == 0)
+                         Fissure(X, Y, rng, TileID.Tile_Water);
+                    else if (rng.Next(0, 1552) == 0)
+                    {
+                         Fissure(X, Y, rng, TileID.InnermostFractal);
+                    }
+                else if (X > _sizeX * 0.87f && rng.Next(0, 1552) == 0)
+                   Fissure(X, Y, rng, TileID.Fractal);
             } 
             
         }
-        GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_crystal, 3 * (_sizeX * 0.05f), 3* (_sizeX * 0.05f));
-        GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_Water, 1 * (_sizeX * 0.05f), 1* (_sizeX * 0.05f));
+        GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_crystal, 3 * (_sizeX * 0.02f), 3* (_sizeX * 0.02f));
+        GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_Water, 1 * (_sizeX * 0.02f), 1* (_sizeX * 0.02f));
 
     }
     void GenerateRectangle(int x, int y, Tile tile_type, float size_x, float size_y)
@@ -186,5 +195,16 @@ public class World
         }
         return false;
     }
-    
+    private void Fissure(int x, int y, Random rng, Tile tileid)
+    {
+        int iteration_count = rng.Next(450, 1000);
+        for (int i = 0; i < iteration_count; i++)
+        {
+            x += rng.Next(0, 2) == 0 ? -1 : 1;
+            y += rng.Next(0, 2) == 0 ? -1 : 1;
+
+             SetTile(x, y, tileid);
+        }
+       
+    }
 }
