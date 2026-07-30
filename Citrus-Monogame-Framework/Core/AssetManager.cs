@@ -13,6 +13,9 @@ public static class AssetManager
 
     public static List<string> textures_names = new List<string>();
     public static List<int> ids = new List<int>();
+     public static List<Vector2> draw_queue_positions = new List<Vector2>();
+    public static List<Texture2D> draw_queue = new List<Texture2D>();
+
 
     public static List<Texture2D> textures_loaded = new List<Texture2D>();
     public static void Init(ContentManager cm, GraphicsDevice gd, SpriteBatch sb)
@@ -32,7 +35,6 @@ public static class AssetManager
     public static Texture2D FindTexture(string AssetName)
     {
         return textures_loaded[textures_names.IndexOf(AssetName)];
-
     }
     public static Texture2D LoadTexture(string AssetName, string AssetPath)
     {
@@ -98,5 +100,37 @@ public static class AssetManager
         spriteBatch.Draw(texture, position, texture.Bounds, Color.White, 0, origin, 1.0f * Camera.GetZoom(), SpriteEffects.None, 0.0f);
         spriteBatch.End();
     }
+    /// <summary>
+    /// Quickly generate a dot texture, draws it through DrawQueue,  that is then disposed next frame.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    public static void QuickDraw(float x, float y)
+    {
+       
+        //Console.WriteLine($"yes bluds drawing: {texture}"); //  Camera.ConvertToCameraPosition(new Vector2(x, y));//
+        Texture2D texture = GenerateTexture(1, 1, Color.Red);
+        Vector2 position =  Camera.ConvertToInvertedCameraPosition(new Vector2(x, y));
 
+        Vector2 texture_size = texture.Bounds.Size.ToVector2(); 
+        Vector2 origin = new Vector2(texture_size.X, texture_size.Y) * 0.5f;
+        draw_queue_positions.Add(position);
+            draw_queue.Add(texture);
+       /*  spriteBatch.Begin();
+        spriteBatch.Draw(texture, position, texture.Bounds, Color.White, 0, origin, 1.0f * Camera.GetZoom(), SpriteEffects.None, 0.0f);
+        spriteBatch.End();*/
+    }
+    public static void DrawQueue()
+    {
+           spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        for (int i = 0; i < draw_queue.Count; i++)
+        {
+            spriteBatch.Draw(draw_queue[i], draw_queue_positions[i], draw_queue[i].Bounds, Color.White, 0,  new Vector2(draw_queue[i].Bounds.Size.X, draw_queue[i].Bounds.Size.Y) * 0.5f, 1.0f * Camera.GetZoom(), SpriteEffects.None, 0.0f);
+
+        }
+        spriteBatch.End();
+
+        draw_queue.Clear();
+        draw_queue_positions.Clear();
+    }
 }

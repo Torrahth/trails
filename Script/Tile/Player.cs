@@ -48,7 +48,7 @@ public class Player : Entity
         int horizontal  = left - right;
         int vertical = up - down;
 
-        Collide();
+       
 
         player_tile = new Vector2((int)Math.Floor(Position.X * 0.125f)+1,(int)Math.Floor(Position.Y * 0.125f)+1);
         mouse_cursor.Position = new Vector2((int)Math.Floor(  player_tile.X* 8f), (int)Math.Floor( player_tile.Y* 8f)); // + new Vector2(Global.current_world._sizeX, Global.current_world._sizeY) * 0.5f;
@@ -57,7 +57,7 @@ public class Player : Entity
             gravity = 0.02f;
             max_gravity = 1;
             horizontal_movement = 0.5f;
-            max_horizontal = 6;
+            max_horizontal = 16;
             jump_height = 0.1f;
             KT = 1;
         }
@@ -69,7 +69,7 @@ public class Player : Entity
             }
 
         }
-          
+         Collide();
         switch (state)
         {
             case States.Normal:
@@ -84,13 +84,13 @@ public class Player : Entity
                 break;
 
         }
-    
-      
-
+         
+            Camera.SetPosition(Position);
+     
       
 
         
-        Camera.SetPosition(Position);
+    
         TileInteractions();
     
         OldPosition = Position;
@@ -109,7 +109,7 @@ public class Player : Entity
     }
     private void Movement(int horizontal, int vertical)
     {
-        if (Collisions.Z == 0)
+        if (Collisions.W == 0)
         {
             Velocity.Y += gravity;
             if (Velocity.Y > max_gravity)
@@ -126,7 +126,7 @@ public class Player : Entity
         }
         else
         {
-             Velocity.X /= 1.4f;
+            // Velocity.X /= 1.1f;
         }
         
         if (vertical == 1 &&  KT > 0)
@@ -138,27 +138,32 @@ public class Player : Entity
     }
     private void Collide()
     {
-        Collisions = Collision.CheckForTileCollisions(Position.X+ Velocity.X, Position.Y+ Velocity.Y, 7, 14);
+        Collisions = Collision.CheckForTileCollisions(Position.X , Position.Y+ Velocity.Y, 6, 14); //Collision.CheckForTileCollisions(Position.X+ Velocity.X, Position.Y+ Velocity.Y, 7, 14);
 
-        if (Collisions.X == 1 || Collisions.Y == 1)
+        if (Collisions.X != 0 || Collisions.Y != 0)
         {
-            
-            //Position.X += Collisions.X;
-            //Position.X -= Collisions.Y;
+            var x = Collisions.X;//(float) MathF.Round(Collisions.X, 2);
+            var y = Collisions.Y;// (float) MathF.Round(Collisions.Y, 2);
+               Console.WriteLine( Velocity.X);
+            Console.WriteLine($"{x}, {y}");
+            // new Vector2((int)Math.Floor(Position.X * 0.125f)+1,(int)Math.Floor(Position.Y * 0.125f)+1)
+           //Position.X = OldPosition.X  ;
+            Position.X += x ;// * 0.01f;
+            Position.X += y;///* 0.01f;
             Velocity.X = 0;
-            Position.X = OldPosition.X ;
+        
         }
         else
         {
             Position.X += Velocity.X;
         }
-        if (Collisions.W == 1 || Collisions.Z == 1)
+        if (Collisions.W != 0 || Collisions.Z != 0)
         {
-           
-           // Position.Y += Collisions.W;
-           // Position.Y -= Collisions.Z;
-            Velocity.Y = 0;
             Position.Y = OldPosition.Y;
+         //   Position.Y -= Collisions.W* 0.010f;
+         //   Position.Y += Collisions.Z* 0.010f;
+            Velocity.Y = 0;
+           
         }
         else
         {

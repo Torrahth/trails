@@ -35,7 +35,7 @@ public class Game1 : GameCore
         AssetManager.Init(Content, GraphicsDevice, _spriteBatch);
 
 
-        world = new World(32*32,32*32, AssetManager.LoadTexture("TileAtlas", "TileAtlas"));
+        world = new World(12*32,12*32, AssetManager.LoadTexture("TileAtlas", "TileAtlas"));
 
         player = new Player(AssetManager.LoadTexture("Player", "PlayerFerret"));
         //Main.entityManager.CreateEntity(player);
@@ -64,17 +64,19 @@ public class Game1 : GameCore
     protected override void Draw(GameTime gameTime)
     {
         frame_counter = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
-        GraphicsDevice.Clear(new Color(225, 232, 255));
+        GraphicsDevice.Clear(Global.current_world.sky_color); //new Color(225, 232, 255));
       
         world.DrawChunks(_spriteBatch);//_spriteBatch.Draw(TileAtlas, TileAtlas.Bounds, Color.Bisque);
        
-        _spriteBatch.Begin();
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         EntityManager.Draw(_spriteBatch);
         _spriteBatch.End();
 
-        _spriteBatch.Begin();
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         GuiManager.Draw(_spriteBatch);
         _spriteBatch.End();
+
+        AssetManager.DrawQueue();
 
         base.Draw(gameTime);
     }

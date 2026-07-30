@@ -17,6 +17,15 @@ public static class EntityManager
         entities.Add(entity);
         return 0; 
     }
+       public static int CreateEntity(Entity entity, Microsoft.Xna.Framework.Vector2 Position)
+        {
+        if (entity == null)
+            return -1;
+
+        entity.Position = Position;
+        entities.Add(entity);
+        return 0; 
+    }
     public static void Draw(SpriteBatch spritebatch)
     {
         foreach (Entity entity in entities)

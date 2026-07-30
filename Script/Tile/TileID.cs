@@ -15,5 +15,8 @@ public static class TileID
     public static Tile Fractal = new TileFractal();
     public static Tile InnermostFractal = new TileInnermostFractal();
 
+    public static Tile PurpleMetal = new TilePurpleMetal();
+    public static Tile BloodOrb = new TileBloodOrb();
+
 
 }

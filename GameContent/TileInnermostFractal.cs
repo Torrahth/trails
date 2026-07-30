@@ -12,5 +12,13 @@ public  class TileInnermostFractal : Tile
         Collidable = false;
     }
    
-    
+}
+
+public class TileBloodOrb : Tile
+{
+    public TileBloodOrb()
+    {
+        tile_id = 10;
+        texture_bounds = new Rectangle(16, 16, 8, 8);
+    }
 }

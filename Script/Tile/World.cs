@@ -15,7 +15,8 @@ public class World
     public Tile[,] world = new Tile[0, 0];
     public Texture2D texture;
     public ChunkingSystem chunks;
-
+    public Color sky_color = Color.White;
+    public Random rng = new Random();
 
     public World(int sizeX, int sizeY, Texture2D new_texture)
     {
@@ -35,13 +36,13 @@ public class World
                 SetTile(X, Y, TileID.Tile_air);
             } 
         }
-        GenerateWorld();
+
+        new WorldGenTypes(this, 2);
         world.Initialize();
-        
     }
     public void SetTile(int x, int y, Tile tile_type)
     {
-        if (!Is_in_world(x, y))
+        if (!Is_in_world(x, y,0))
         {
             return;
         }
@@ -57,22 +58,24 @@ public class World
     }
     public void DrawChunks(SpriteBatch spriteBatch)
     {
-        spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+       
+        spriteBatch.Begin(samplerState: SamplerState.PointClamp );
        float camera_zoom = Camera.GetZoom();
         Vector2 texture_size = texture.Bounds.Size.ToVector2(); 
         Vector2 origin = new Vector2(texture_size.X, texture_size.Y) * 0.5f;
         foreach (Chunk chunk in chunks.get_chunks())
         {
+            rng = new Random((int)chunk.GetCoords().Length());
+
             for (int x = 0; x < 32; ++x)
             {
                 for (int y = 0; y < 32; y++)
                 {
-                //Random rng = new Random(chunk.chunk_ID + x * y);
 
                 Tile C_tile = chunk.chunk[x, y];
                 Vector2 position = new Vector2(x, y)  * 8+  new Vector2(32, 32)* chunk.GetCoords()*8+new Vector2(8, 8);
 
-                spriteBatch.Draw(texture, (position - Camera.GetPosition()) * camera_zoom +Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin, camera_zoom, SpriteEffects.FlipHorizontally, 1.0f);
+                spriteBatch.Draw(texture, (position - Camera.GetPosition()) * camera_zoom +Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin, camera_zoom, rng.Next(0, 2) == 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 1.0f);
                 }
             }
         }
@@ -102,72 +105,21 @@ public class World
             }
         }
     }
-    public void GenerateWorld()
+   
+    public void GenerateWorldBorder(Tile tile_type, int width)
     {
-         int border = 2;
-        for (int X = 0; X < _sizeX; ++X)
+        for (int x = 0; x < _sizeX; ++x)
         {
-            for (int Y = 0; Y < _sizeY; Y++)
+            for (int y = 0; y < _sizeY; y++)
             {
-                Random rng = new Random();
-
-                if ((X < border || X > _sizeX-1 - border) || (Y < border || Y > _sizeY-1 - border))
+                if ((x < width || x > _sizeX-1 - width) || (y < width || y > _sizeY-1 - width))
                 {
-                    SetTile(X, Y, TileID.Tile_brick);
+                    SetTile(x, y, tile_type);
                 }
-               
-                else if (Y < _sizeY * 0.33f)
-                {
-                    if (rng.Next(0, 2) == 0)
-                      SetTile(X, Y, TileID.Tile_dirt);
-                    else
-                        SetTile(X, Y, TileID.Tile_air);
-                    
-                    if (X < _sizeX * 0.5f && rng.Next(0, 2) == 0)
-                    {
-                        SetTile(X, Y, TileID.Tile_crystal);
-                       
-                    }
-
-                }
-                else if (Y > _sizeX * 0.75f)
-                {
-                    if (X < _sizeX * 0.5f)
-                    {
-                    if (rng.Next(0, 136) == 0)
-                        GenerateRectangle(X, Y, TileID.Tile_brick, rng.Next(5, 22) , rng.Next(1, 3));
-                    if (rng.Next(0, 136) == 0)
-                        GenerateRectangle(X, Y - 4, TileID.Sunchain, 1, rng.Next(1, 22));
-                    if (rng.Next(0, 136) == 0)
-                        GenerateRectangle(X, Y, TileID.Sunstone, 1 , 1);
-                    }
-                    else
-                    {
-                        if (rng.Next(0, 12) == 0)
-                            GenerateRectangle(X, Y, TileID.Tile_dirt, 1, rng.Next(1, 42));
-                        else
-                            SetTile(X, Y, TileID.Tile_Water);
-                    }
-                }
-                if (rng.Next(0, 236) == 0)
-                        GenerateRectangle(X, Y, TileID.Tile_dirt, rng.Next(1, 3) , rng.Next(1, 3));
-                if (X > _sizeX * 0.90)
-                    if (rng.Next(0, 1552) == 0)
-                         Fissure(X, Y, rng, TileID.Tile_Water);
-                    else if (rng.Next(0, 1552) == 0)
-                    {
-                         Fissure(X, Y, rng, TileID.InnermostFractal);
-                    }
-                else if (X > _sizeX * 0.87f && rng.Next(0, 1552) == 0)
-                   Fissure(X, Y, rng, TileID.Fractal);
-            } 
-            
+            }
         }
-        GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_crystal, 3 * (_sizeX * 0.02f), 3* (_sizeX * 0.02f));
-        GenerateRectangle((int)(_sizeX * 0.5f), (int)(_sizeY * 0.5f), TileID.Tile_Water, 1 * (_sizeX * 0.02f), 1* (_sizeX * 0.02f));
-
     }
-    void GenerateRectangle(int x, int y, Tile tile_type, float size_x, float size_y)
+    public void GenerateRectangle(int x, int y, Tile tile_type, float size_x, float size_y)
     {
       
 
@@ -178,27 +130,71 @@ public class World
         {
             for (int Y = 0; Y < size_y; Y++)
             {
-                int _x = x + X - (int)Math.Floor(size_x * 0.5f);
-                int _y = y + Y - (int)Math.Floor(size_y * 0.5f);
-                if (!Is_in_world(_x, _y))
+                int _x = x - X + (int)Math.Floor(size_x * 0.5f);
+                int _y = y - Y + (int)Math.Floor(size_y * 0.5f);
+                if (!Is_in_world(_x, _y, 0))
                     return;
 
                 SetTile(_x, _y, tile_type);
             }
         }
     }
-    public bool Is_in_world(int x, int y)
+    public void GenerateOrb(int x, int y, Tile tile_type, int width)
     {
-        if (x >= 0 && x < _sizeX && y >= 0 && y < _sizeY)
+        int widthhalf = (int)Math.Ceiling(width *0.5f);
+        for (int Y= 0; Y < width+1; Y++)
+        {
+        for (int X= 0; X < width+1; X++)
+        {
+            if (Math.Floor(Main.DistanceFrom(new Vector2(x +X - widthhalf, y+ Y - widthhalf), new Vector2(x, y))) < widthhalf)
+                SetTile(x+(int)( X - widthhalf), y+ (int)( Y - widthhalf), tile_type);
+           // else
+        //        SetTile(x+(int)( X - widthhalf),  y+(int)( Y - widthhalf), TileID.Tile_Water);
+        }
+        }
+       // SetTile(x, y, TileID.Fractal);
+
+    }
+    public void GenerateSeaWeed(int x, int y, Tile tile_type, float size_x, float size_y, int width)
+    {
+        int temp = 0;
+        Random rng = new Random();
+
+        size_x = (int)Math.Floor(size_x);
+        size_y = (int)Math.Floor(size_y);
+
+        for (int X = 0; X < size_x; X++)
+        {
+            for (int Y = 0; Y < size_y; Y++)
+            {
+                temp = Math.Clamp(temp + rng.Next(-1, 2), -width, width);
+                int _x = x - X + (int)Math.Floor(size_x * 0.5f);
+                int _y = y - Y + (int)Math.Floor(size_y * 0.5f);
+                if (!Is_in_world(_x, _y, 0))
+                    return;
+
+                SetTile(_x + temp, _y, tile_type);
+            }
+        }
+    }
+    /// <summary>
+    /// if is in world, border is for if is inside the world + border width
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="border"></param>
+    /// <returns></returns>
+    public bool Is_in_world(int x, int y, int border)
+    {
+        if (x >= border && x < _sizeX - border && y >= border && y < _sizeY - border)
         {
             return true;
         }
         return false;
     }
-    private void Fissure(int x, int y, Random rng, Tile tileid)
+    public void GenerateFissure(int x, int y, Random rng, Tile tileid, int amount)
     {
-        int iteration_count = rng.Next(450, 1000);
-        for (int i = 0; i < iteration_count; i++)
+        for (int i = 0; i < amount; i++)
         {
             x += rng.Next(0, 2) == 0 ? -1 : 1;
             y += rng.Next(0, 2) == 0 ? -1 : 1;
