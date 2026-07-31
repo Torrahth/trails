@@ -23,11 +23,11 @@ public static class Camera
         KeyboardState keyboardState = Keyboard.GetState();
         viewport = Main.GetViewportSize() * 0.5f;
 
-        if (keyboardState.IsKeyDown(Keys.PageUp))
+        if (keyboardState.IsKeyDown(Keys.OemMinus))
         {
             zoom = MathHelper.Clamp(zoom - 0.1f, 0.1f, 4.0f);
         }
-        else if (keyboardState.IsKeyDown(Keys.PageDown))
+        else if (keyboardState.IsKeyDown(Keys.OemPlus))
         {
             zoom = MathHelper.Clamp(zoom + 0.1f, 0.1f, 4.0f);
         }

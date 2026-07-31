@@ -1,4 +1,4 @@
 {
-    "World_Information": "Please type a value through 0-3 for proper world type.",
-	"WORLD_TYPE": 3
+    "World_Information": "Please type a value through 0-3 for proper world type. Crazy=0, Fractal=1, Normal=2, Cell=3",
+	"World_type": 2
 }
