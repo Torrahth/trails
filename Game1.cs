@@ -32,10 +32,10 @@ public class Game1 : GameCore
     }
     public void Setup()
     {
+        Random rng = new Random();
         AssetManager.Init(Content, GraphicsDevice, _spriteBatch);
 
-
-        world = new World(12*32,12*32, AssetManager.LoadTexture("TileAtlas", "TileAtlas"));
+        world = new World(32*32,12*32, AssetManager.LoadTexture("TileAtlas", "TileAtlas"), 2); //rng.Next(0, 4)
 
         player = new Player(AssetManager.LoadTexture("Player", "PlayerFerret"));
         //Main.entityManager.CreateEntity(player);
@@ -55,8 +55,7 @@ public class Game1 : GameCore
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-
-         Window.Title = "trails" + frame_counter;
+        Window.Title = "trails" + frame_counter;
 
         base.Update(gameTime);
     }

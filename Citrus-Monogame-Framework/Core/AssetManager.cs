@@ -115,10 +115,21 @@ public static class AssetManager
         Vector2 texture_size = texture.Bounds.Size.ToVector2(); 
         Vector2 origin = new Vector2(texture_size.X, texture_size.Y) * 0.5f;
         draw_queue_positions.Add(position);
-            draw_queue.Add(texture);
+        draw_queue.Add(texture);
        /*  spriteBatch.Begin();
         spriteBatch.Draw(texture, position, texture.Bounds, Color.White, 0, origin, 1.0f * Camera.GetZoom(), SpriteEffects.None, 0.0f);
         spriteBatch.End();*/
+    }
+    public static void QuickDraw(float x, float y, int sizeX, int sizeY, Color color)
+    {
+        //Console.WriteLine($"yes bluds drawing: {texture}"); //  Camera.ConvertToCameraPosition(new Vector2(x, y));//
+        Texture2D texture = GenerateTexture(sizeX, sizeY, color);
+        Vector2 position =  Camera.ConvertToInvertedCameraPosition(new Vector2(x, y));
+
+        Vector2 texture_size = texture.Bounds.Size.ToVector2(); 
+        Vector2 origin = new Vector2(texture_size.X, texture_size.Y) * 0.5f;
+        draw_queue_positions.Add(position);
+        draw_queue.Add(texture);
     }
     public static void DrawQueue()
     {

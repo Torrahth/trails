@@ -18,7 +18,7 @@ public class World
     public Color sky_color = Color.White;
     public Random rng = new Random();
 
-    public World(int sizeX, int sizeY, Texture2D new_texture)
+    public World(int sizeX, int sizeY, Texture2D new_texture, int World_type)
     {
         chunks = new ChunkingSystem(this);
         _sizeX = sizeX;
@@ -37,7 +37,7 @@ public class World
             } 
         }
 
-        new WorldGenTypes(this, 2);
+        new WorldGenTypes(this, World_type);
         world.Initialize();
     }
     public void SetTile(int x, int y, Tile tile_type)
@@ -71,7 +71,6 @@ public class World
             {
                 for (int y = 0; y < 32; y++)
                 {
-
                 Tile C_tile = chunk.chunk[x, y];
                 Vector2 position = new Vector2(x, y)  * 8+  new Vector2(32, 32)* chunk.GetCoords()*8+new Vector2(8, 8);
 
@@ -155,27 +154,25 @@ public class World
        // SetTile(x, y, TileID.Fractal);
 
     }
-    public void GenerateSeaWeed(int x, int y, Tile tile_type, float size_x, float size_y, int width)
+    public void GenerateSeaWeed(int x, int y, Tile tile_type, int size_x=1, float size_y=1, int width=1, int height=1, int chance_to_change=1)
     {
         int temp = 0;
         Random rng = new Random();
 
-        size_x = (int)Math.Floor(size_x);
-        size_y = (int)Math.Floor(size_y);
-
-        for (int X = 0; X < size_x; X++)
-        {
             for (int Y = 0; Y < size_y; Y++)
             {
-                temp = Math.Clamp(temp + rng.Next(-1, 2), -width, width);
-                int _x = x - X + (int)Math.Floor(size_x * 0.5f);
-                int _y = y - Y + (int)Math.Floor(size_y * 0.5f);
+                if (rng.Next(0, chance_to_change) == 0)
+                    temp = Math.Clamp(temp + rng.Next(-1, 2), -size_x, size_x);
+                int _x = x ;
+                int _y = y - Y;// - (int)Math.Floor(size_y * 0.5f);
                 if (!Is_in_world(_x, _y, 0))
                     return;
 
-                SetTile(_x + temp, _y, tile_type);
+                if (width == 1)
+                    SetTile(_x + temp, _y, tile_type);
+                else
+                    GenerateRectangle(_x + temp, _y, tile_type, width, height);
             }
-        }
     }
     /// <summary>
     /// if is in world, border is for if is inside the world + border width
@@ -192,15 +189,37 @@ public class World
         }
         return false;
     }
-    public void GenerateFissure(int x, int y, Random rng, Tile tileid, int amount)
+    public void GenerateFissure(int x, int y, Random rng, Tile tileid, int amount, int count=1)
     {
-        for (int i = 0; i < amount; i++)
+     
+        for (int C = 0; C < count; C++)
         {
-            x += rng.Next(0, 2) == 0 ? -1 : 1;
-            y += rng.Next(0, 2) == 0 ? -1 : 1;
+           int NX = x;
+           int NY = y;
+           for (int i = 0; i < amount; i++)
+           {
+                NX += rng.Next(0, 2) == 0 ? -1 : 1;
+                NY += rng.Next(0, 2) == 0 ? -1 : 1;
 
-             SetTile(x, y, tileid);
+                SetTile(NX, NY, tileid);
+            }
         }
-       
     }
+    
+    public void GenerateFissure(int x, int y, Random rng, Tile tileid, int amount, int size_X, int size_Y, bool fade, int count=1)
+    {
+
+        for (int C = 0; C < count; C++)
+        {
+            int NX = x;
+            int NY = y;
+            for (int i = 0; i < amount; i++)
+            {
+                NX += rng.Next(0, 2) == 0 ? -1 : 1;
+                NY += rng.Next(0, 2) == 0 ? -1 : 1;
+                GenerateRectangle(NX, NY, tileid, size_X, size_Y);// SetTile(x, y, tileid);
+            }
+       }
+    }
+    
 }

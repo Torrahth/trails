@@ -7,6 +7,7 @@ public class WorldGenTypes
 {
     World world;
     public WorldGenTypes(World world, int type){
+
         this.world = world;
 
         switch (type)
@@ -31,13 +32,18 @@ public class WorldGenTypes
                     GenerateCellWorld();    
                 }
                 break;
+            default:
+                {
+                    world.GenerateWorldBorder(TileID.Tile_dirt, (int)(world._sizeX * 0.35f));
+                }
+                break;
 
         }
     }
 
     public void GeneratePlains()
     {
-        world.sky_color = new Microsoft.Xna.Framework.Color(225, 232, 255);
+        world.sky_color = new Microsoft.Xna.Framework.Color(195, 232, 255);
 
         Random rng = new Random();
         int slope = (int)(world._sizeY * 0.51f);
@@ -82,36 +88,38 @@ public class WorldGenTypes
                 if (rng.Next(0, 3) == 0)
                      slope = Math.Clamp(slope + rng.Next(-1, 2), (int)(world._sizeY * 0.45f), (int)(world._sizeY * 0.55f));
 
-             
+     
             }
 
             for (int Y = 0; Y < world._sizeY; Y++)
             {
                 
 
-                 if (Y > slope)
+                if (Y > slope)
                 {
                     world.SetTile(X, Y, TileID.Tile_dirt);
                 }
-        
+          
              
 
             }
-          
+            if (rng.Next(0, 55) == 0 && slope > world._sizeY * 0.3f)
+            { // weird giant trees
+                world.GenerateSeaWeed(X, slope+2 , TileID.Tile_brick, 62, 55, 4, 1, 3) ;
+                world.GenerateFissure(X, slope - 55, new Random(), TileID.Tile_dirt, 50, 6, 6, false, 7);
+            }
           
         }
         for (int X = 0; X < world._sizeX; ++X)
         {
             for (int Y = 0; Y < world._sizeY; Y++)
             {
-                if (rng.Next(0, 2533) == 0)
+                if (Y > world._sizeY * 0.5f && rng.Next(0, 2533) == 0)
                 {
-                    int size = rng.Next(10, 30);
-                    world.GenerateOrb(X, Y, TileID.PurpleMetal, size);
-                    world.GenerateOrb(X, Y, TileID.Tile_air, size - 2);
-                    world.GenerateFissure(X, Y, rng, TileID.Tile_crystal, rng.Next(5, 10) * size);
-
-
+                    GenerateRoom(X, Y, rng.Next(4, 20), rng.Next(4, 20), TileID.Tile_brick);
+                   // world.GenerateOrb(X, Y, TileID.PurpleMetal, size);
+                   // world.GenerateOrb(X, Y, TileID.Tile_air, size - 2);
+                  //  world.GenerateFissure(X, Y, rng, TileID.Tile_crystal, rng.Next(5, 10) * size);
                 }
             }
         }
@@ -263,22 +271,31 @@ public class WorldGenTypes
 
         int rX = rng.Next(120, world._sizeX - 120);
         int rY = rng.Next(120, world._sizeY - 120);
-        world.GenerateFissure(rX, rY, rng, TileID.Fractal, 900 );
-        world.GenerateFissure(rX, rY, rng, TileID.Fractal, 900 );
-
-        world.GenerateFissure(rX, rY, rng, TileID.Fractal, 900 );
-
+        for (int i = 0; i < 12; i++)
+        {
+            world.GenerateFissure(rX, rY, rng, TileID.Fractal, 900 );
+        }
         world.GenerateOrb(rX, rY, TileID.BloodOrb, 30);
 
         world.GenerateOrb(rX, rY, TileID.Tile_Water, 25);
+        world.GenerateFissure(rX, rY, rng, TileID.Tile_Water, 400, 3, 3, true );
+
         world.GenerateFissure(rX, rY, rng, TileID.BloodOrb, 5 );
 
         world.GenerateWorldBorder(TileID.Fractal,  2);
 
 
     }
-    public void GenerateRoom(int length)
+    public void GenerateRoom(int x, int y, int width, int height, Tile tile_type)
     {
-        
+        world.GenerateRectangle(x, y, tile_type, width, height);
+        world.GenerateRectangle(x, y, TileID.Tile_air, width-2, height-2);
+       /* for (int y = 0; y < width; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                
+            }
+        }*/
     }
 }
