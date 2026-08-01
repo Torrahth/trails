@@ -38,3 +38,4 @@ c:\Users\gorri\OneDrive\Documents\trails\trails\trails\obj\Release\net9.0\refint
 c:\Users\gorri\OneDrive\Documents\trails\trails\trails\obj\Release\net9.0\trails.pdb
 c:\Users\gorri\OneDrive\Documents\trails\trails\trails\obj\Release\net9.0\trails.genruntimeconfig.cache
 c:\Users\gorri\OneDrive\Documents\trails\trails\trails\obj\Release\net9.0\ref\trails.dll
+c:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Release\net9.0\game-config.json
