@@ -34,13 +34,13 @@ public class Game1 : GameCore
     }
     public void Setup()
     {
-        string file = File.ReadAllText("../../../game-config.json");
+        string file =  File.ReadAllText($"{AppContext.BaseDirectory}/game-config.json");
         Random rng = new Random();
         AssetManager.Init(Content, GraphicsDevice, _spriteBatch);
         
         JsonData d = JsonSerializer.Deserialize<JsonData>(file);
 
-        world = new World(32*32,12*32, AssetManager.LoadTexture("TileAtlas", "TileAtlas"), d.World_type); //rng.Next(0, 4)
+        world = new World(d.World_size_X *32,d.World_size_Y*32, AssetManager.LoadTexture("TileAtlas", "TileAtlas"), d.World_type); //rng.Next(0, 4)
 
         player = new Player(AssetManager.LoadTexture("Player", "PlayerFerret"));
         //Main.entityManager.CreateEntity(player);
@@ -69,8 +69,9 @@ public class Game1 : GameCore
     {
         frame_counter = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
         GraphicsDevice.Clear(Global.current_world.sky_color); //new Color(225, 232, 255));
-      
+         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         world.DrawChunks(_spriteBatch);//_spriteBatch.Draw(TileAtlas, TileAtlas.Bounds, Color.Bisque);
+        _spriteBatch.End();
        
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         EntityManager.Draw(_spriteBatch);

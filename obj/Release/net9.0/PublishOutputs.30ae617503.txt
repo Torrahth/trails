@@ -1,4 +1,5 @@
 c:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Release\net9.0\publish\trails.exe
+c:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Release\net9.0\publish\game-config.json
 c:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Release\net9.0\publish\Content/PlayerFerret.xnb
 c:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Release\net9.0\publish\Content/TileAtlas.xnb
 c:\Users\gorri\OneDrive\Documents\trails\trails\trails\bin\Release\net9.0\publish\Content/TileSelector.xnb
