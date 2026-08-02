@@ -205,13 +205,21 @@ public class Player : Entity
             tile_type = TileID.Sunstone;
         if (Keyboard.GetState().IsKeyDown(Keys.D6))
             tile_type = TileID.Sunchain;
+        if (Keyboard.GetState().IsKeyDown(Keys.D7))
+            tile_type = TileID.Fractal;
+        if (Keyboard.GetState().IsKeyDown(Keys.D8))
+            tile_type = TileID.PurpleMetal;
+        if (Keyboard.GetState().IsKeyDown(Keys.D9))
+            tile_type = TileID.InnermostFractal;
+        if (Keyboard.GetState().IsKeyDown(Keys.D0))
+            tile_type = TileID.BloodOrb;
        
 
         Vector2 mouse_pos = Mouse.GetState().Position.ToVector2() * zoom;
         Vector2 worldhalf = (new Vector2(Global.current_world._sizeX, Global.current_world._sizeY) * 0.5f) ;
         Vector2 pos = ((Position * 0.125f) + mouse_pos - (Camera.GetHalfViewport()* zoom))  + worldhalf; //((Mouse.GetState().Position.ToVector2() + new Vector2(-Camera.GetHalfViewport().X, Camera.GetHalfViewport().Y)) / 8) + Position / 8;//     * Camera.GetZoom()) + ( Camera.GetPosition() / 8) ;
-        int player_tile_x = (int)(pos.X +0.5f) ; //((int)Position.X  / 8)+ (Global.current_world._sizeX/2);
-        int player_tile_y = (int)(pos.Y +0.5f); //((int)Position.Y/ 8) +(Global.current_world._sizeY/2);
+        int player_tile_x = (int)(pos.X )+1 ; //((int)Position.X  / 8)+ (Global.current_world._sizeX/2);
+        int player_tile_y = (int)(pos.Y )+1; //((int)Position.Y/ 8) +(Global.current_world._sizeY/2);
         
   
         mouse_cursor_t.draw_rectangle = tile_type.texture_bounds;

@@ -4,9 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/PlayerFerret.png</File>
-    <File>C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/TileAtlas.png</File>
-    <File>C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/TileSelector.png</File>
+    <File>c:/Users/never/OneDrive/Documents/trails/Content/../Assets/PlayerFerret.png</File>
+    <File>c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileAtlas.png</File>
+    <File>c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileSelector.png</File>
   </SourceFiles>
   <DestFiles>
     <File>PlayerFerret.png</File>

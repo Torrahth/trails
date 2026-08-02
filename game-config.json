@@ -4,5 +4,5 @@
 	"World_size_Y": 32,
 	"World_type": 2,
 	"Chunk_Information": "Does cap out at like 30 just in case you make it to big",
-	"Chunk_radius": 12
+	"Chunk_radius": 6
 }

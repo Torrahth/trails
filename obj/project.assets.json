@@ -310,31 +310,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gorri\\.nuget\\packages\\": {},
-    "C:\\Users\\gorri\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {}
+    "C:\\Users\\never\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
+      "projectUniqueName": "C:\\Users\\never\\OneDrive\\Documents\\trails\\trails.csproj",
       "projectName": "trails",
-      "projectPath": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\trails.csproj",
-      "packagesPath": "C:\\Users\\gorri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gorri\\OneDrive\\Documents\\trails\\trails\\trails\\obj\\",
+      "projectPath": "C:\\Users\\never\\OneDrive\\Documents\\trails\\trails.csproj",
+      "packagesPath": "C:\\Users\\never\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\never\\OneDrive\\Documents\\trails\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Users\\gorri\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\gorri\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Users\\gorri\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\never\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -384,19 +377,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[9.0.18, 9.0.18]"
+            "version": "[9.0.17, 9.0.17]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[9.0.18, 9.0.18]"
+            "version": "[9.0.17, 9.0.17]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.18, 9.0.18]"
+            "version": "[9.0.17, 9.0.17]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[9.0.18, 9.0.18]"
+            "version": "[9.0.17, 9.0.17]"
           }
         ],
         "frameworkReferences": {
@@ -404,7 +397,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

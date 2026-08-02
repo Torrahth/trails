@@ -1,4 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/PlayerFerret.png","C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/bin/DesktopGL/Content/PlayerFerret.xnb","TextureProcessor","Texture2DContent",91,229,0.0901123
-"C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/TileAtlas.png","C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/bin/DesktopGL/Content/TileAtlas.xnb","TextureProcessor","Texture2DContent",2939,49237,0.0974912
-"C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/../Assets/TileSelector.png","C:/Users/gorri/OneDrive/Documents/trails/trails/trails/Content/bin/DesktopGL/Content/TileSelector.xnb","TextureProcessor","Texture2DContent",111,341,0.0014672
+"c:/Users/never/OneDrive/Documents/trails/Content/../Assets/PlayerFerret.png","c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/PlayerFerret.xnb","TextureProcessor","Texture2DContent",207,477,0.6682993
+"c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileAtlas.png","c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/TileAtlas.xnb","TextureProcessor","Texture2DContent",2939,49237,1.7668464
+"c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileSelector.png","c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/TileSelector.xnb","TextureProcessor","Texture2DContent",111,341,0.4696411
