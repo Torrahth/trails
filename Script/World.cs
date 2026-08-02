@@ -89,29 +89,6 @@ public class World
         //Camera.GetPosition() / 8 - 
         
     }
-    public void DrawWorld(SpriteBatch spriteBatch)
-    {
-        for (int x = 0; x < _sizeX; ++x)
-        {
-            for (int y = 0; y < _sizeY; y++)
-            {
-                Random rng = new Random();
-
-                var C_tile = world[x, y];
-
-                Vector2 position = new Vector2(x, y) * 8;
-
-                Vector2 texture_size = texture.Bounds.Size.ToVector2(); 
-                Vector2 origin = new Vector2(texture_size.X, texture_size.Y)/ 2;
-
-                SpriteEffects effects = rng.Next(0, 2) == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-
-                spriteBatch.Draw(texture, ((position - Camera.GetPosition()) )* Camera.GetZoom() +Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin, Camera.GetZoom(), effects, 1.0f);
-
-            }
-        }
-    }
-   
     public void GenerateWorldBorder(Tile tile_type, int width)
     {
         for (int x = 0; x < _sizeX; ++x)

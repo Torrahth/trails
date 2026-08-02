@@ -80,3 +80,4 @@ c:\Users\never\OneDrive\Documents\trails\obj\Debug\net9.0\refint\trails.dll
 c:\Users\never\OneDrive\Documents\trails\obj\Debug\net9.0\trails.pdb
 c:\Users\never\OneDrive\Documents\trails\obj\Debug\net9.0\trails.genruntimeconfig.cache
 c:\Users\never\OneDrive\Documents\trails\obj\Debug\net9.0\ref\trails.dll
+c:\Users\never\OneDrive\Documents\trails\bin\Debug\net9.0\Content\SmallLight.xnb

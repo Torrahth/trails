@@ -7,10 +7,12 @@
     <File>c:/Users/never/OneDrive/Documents/trails/Content/../Assets/PlayerFerret.png</File>
     <File>c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileAtlas.png</File>
     <File>c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileSelector.png</File>
+    <File>c:/Users/never/OneDrive/Documents/trails/Content/../Assets/SmallLight.png</File>
   </SourceFiles>
   <DestFiles>
     <File>PlayerFerret.png</File>
     <File>TileAtlas.png</File>
     <File>TileSelector.png</File>
+    <File>SmallLight.png</File>
   </DestFiles>
 </SourceFileCollection>

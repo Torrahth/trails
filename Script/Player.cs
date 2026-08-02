@@ -213,7 +213,8 @@ public class Player : Entity
             tile_type = TileID.InnermostFractal;
         if (Keyboard.GetState().IsKeyDown(Keys.D0))
             tile_type = TileID.BloodOrb;
-       
+        if (Keyboard.GetState().IsKeyDown(Keys.Q))
+            tile_type = TileID.RoseQuartz;
 
         Vector2 mouse_pos = Mouse.GetState().Position.ToVector2() * zoom;
         Vector2 worldhalf = (new Vector2(Global.current_world._sizeX, Global.current_world._sizeY) * 0.5f) ;
@@ -225,7 +226,7 @@ public class Player : Entity
         mouse_cursor_t.draw_rectangle = tile_type.texture_bounds;
         mouse_cursor_t.Position = (new Vector2(player_tile_x-0.5f, player_tile_y-0.5f) - worldhalf) * 8; // + new Vector2(Global.current_world._sizeX, Global.current_world._sizeY) * 0.5f;
         mouse_cursor.Position = mouse_cursor_t.Position;
-
+        //AssetManager.QuickDraw(mouse_cursor_t.Position.X, mouse_cursor_t.Position.Y, AssetManager.LoadTexture("glow", "SmallLight"));
         if (Mouse.GetState().LeftButton == ButtonState.Pressed)
         {
             Global.current_world.SetTile(player_tile_x, player_tile_y, tile_type);

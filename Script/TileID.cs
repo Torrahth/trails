@@ -16,5 +16,6 @@ public static class TileID
     public static Tile PurpleMetal = new TilePurpleMetal();
     public static Tile BloodOrb = new TileBloodOrb();
 
+    public static Tile RoseQuartz = new TileRoseQuartz();
 
 }

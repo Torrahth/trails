@@ -82,3 +82,10 @@ public class TileBloodOrb : Tile
         tile_id = 10;
     }
 }
+public class TileRoseQuartz : Tile
+{
+    public TileRoseQuartz(): base(3, 2)
+    {
+        tile_id = 11;
+    }
+}

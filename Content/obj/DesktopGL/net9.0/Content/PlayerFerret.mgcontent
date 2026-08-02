@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>c:/Users/never/OneDrive/Documents/trails/Content/../Assets/PlayerFerret.png</SourceFile>
-  <SourceTime>2026-08-02T03:53:49.6438483-05:00</SourceTime>
+  <SourceTime>2026-08-02T14:09:15.5301952-05:00</SourceTime>
   <DestFile>c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/PlayerFerret.xnb</DestFile>
-  <DestTime>2026-08-02T03:54:31.7853465-05:00</DestTime>
+  <DestTime>2026-08-02T14:20:12.7164215-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-10-20T09:25:32-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
