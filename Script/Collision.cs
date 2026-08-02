@@ -38,9 +38,11 @@ public static class Collision
         //Global.current_world.SetTile(PLAYER_TILEX, PLAYER_TILEY, TileID.Sunchain);
 
         if (GetTile((x*0.125f)+ _sizeX, (y*0.125f) ).Collidable)
-            collided.X = -Main.DistanceFrom(GetTilePosX(((x + 0.5f) * 0.125f) - _sizeX), (x*0.125f)+ _sizeX) * 8; 
+            collided.X = -Main.DistanceFrom((x*0.125f)+ _sizeX, GetTilePosX(((x + 0.5f) * 0.125f) - _sizeX)) * 8; 
+            //-Main.DistanceFrom(GetTilePosX(((x + 0.5f) * 0.125f) - _sizeX), (x*0.125f)+ _sizeX) * 8; 
         if (GetTile((x*0.125f)- _sizeX, (y*0.125f) ).Collidable)
             collided.Y = Main.DistanceFrom(GetTilePosX(((x + 0.5f) * 0.125f) + _sizeX), (x*0.125f)+ _sizeX) * 4; 
+            //Main.DistanceFrom(GetTilePosX(((x + 0.5f) * 0.125f) + _sizeX), (x*0.125f)+ _sizeX) * 4; 
 
         if (GetTile((x*0.125f), (y*0.125f) + _sizeY).Collidable)
             collided.W = -Main.DistanceFrom((y*0.125f)+ _sizeY, GetTilePosY(((y + 0.5f) * 0.125f) - _sizeY)) * 8; 

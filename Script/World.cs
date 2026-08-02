@@ -61,8 +61,7 @@ public class World
        
         spriteBatch.Begin(samplerState: SamplerState.PointClamp );
        float camera_zoom = Camera.GetZoom();
-        Vector2 texture_size = texture.Bounds.Size.ToVector2(); 
-        Vector2 origin = new Vector2(texture_size.X, texture_size.Y) * 0.5f;
+
         foreach (Chunk chunk in chunks.get_chunks())
         {
             rng = new Random((int)chunk.GetCoords().Length());
@@ -72,7 +71,10 @@ public class World
                 for (int y = 0; y < 32; y++)
                 {
                 Tile C_tile = chunk.chunk[x, y];
-                Vector2 position = new Vector2(x, y)  * 8+  new Vector2(32, 32)* chunk.GetCoords()*8+new Vector2(8, 8);
+                        Vector2 texture_size = C_tile.texture_bounds.Size.ToVector2(); 
+         Vector2 origin = new Vector2(texture_size.X, texture_size.Y) * 0.5f;
+                Vector2 tile = new Vector2(x, y)  * 8;
+                Vector2 position = tile+  ((new Vector2(32, 32)* chunk.GetCoords())*8)-new Vector2(8, 8) ;
 
                 spriteBatch.Draw(texture, (position - Camera.GetPosition()) * camera_zoom +Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin, camera_zoom, rng.Next(0, 2) == 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 1.0f);
                 }

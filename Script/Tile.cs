@@ -15,19 +15,12 @@ public class Tile
     public Rectangle texture_bounds = new Rectangle(0, 0, 8, 8);
     public bool Collidable;
     //public Texture2D texture;
-
-    public void Init(Texture2D new_texture)
+    public Tile(int x, int y, int sizex=8, int sizey=8, bool collidable=true)
     {
-
-
-       // texture = new_texture;
-    }
-    public Tile(int x, int y, int sizex=1, int sizey=1, bool collidable=true)
-    {
-        texture_bounds.X = ((x * 8) + 1)*4;
-        texture_bounds.Y = ((y * 8) + 1)*4;
-        texture_bounds.Width = sizex*8;
-        texture_bounds.Height = sizey*8;
+        texture_bounds.X = x * 8;//((x * 8) + 1)*4;
+        texture_bounds.Y = y * 8;//((y * 8) + 1)*4;
+        texture_bounds.Width = sizex;
+        texture_bounds.Height = sizey;
         Collidable=collidable;
     }
     public void GetTileSize() // b
