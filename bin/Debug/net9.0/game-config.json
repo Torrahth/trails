@@ -1,7 +1,7 @@
 {
     "World_Information": "Please type a value through 0-3 for proper world type. Crazy=0, Fractal=1, Normal=2, Cell=3",
-	"World_size_X": 2,
-	"World_size_Y": 2,
+	"World_size_X": 32,
+	"World_size_Y": 32,
 	"World_type": 2,
 	"Chunk_Information": "Does cap out at like 30 just in case you make it to big",
 	"Chunk_radius": 12

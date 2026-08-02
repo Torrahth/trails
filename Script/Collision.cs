@@ -37,17 +37,19 @@ public static class Collision
         AssetManager.QuickDraw(((x + 0.5f) ), ((y + 0.5f) ), 1, 1, Color.IndianRed);*/
         //Global.current_world.SetTile(PLAYER_TILEX, PLAYER_TILEY, TileID.Sunchain);
 
-        if (GetTile((x*0.125f)+ _sizeX, (y*0.125f) ).Collidable)
-            collided.X = -Main.DistanceFrom((x*0.125f)+ _sizeX, GetTilePosX(((x + 0.5f) * 0.125f) - _sizeX)) * 8; 
-            //-Main.DistanceFrom(GetTilePosX(((x + 0.5f) * 0.125f) - _sizeX), (x*0.125f)+ _sizeX) * 8; 
-        if (GetTile((x*0.125f)- _sizeX, (y*0.125f) ).Collidable)
-            collided.Y = Main.DistanceFrom(GetTilePosX(((x + 0.5f) * 0.125f) + _sizeX), (x*0.125f)+ _sizeX) * 4; 
-            //Main.DistanceFrom(GetTilePosX(((x + 0.5f) * 0.125f) + _sizeX), (x*0.125f)+ _sizeX) * 4; 
+        for (int Y = TileSizeY; Y > 0; Y--)
+        {
+            if (GetTile(player_tile_x + _sizeX, player_tile_y  ).Collidable)
+                collided.X = Main.DistanceFrom(GetTilePosX(((x + 0.5f) * 0.125f) - _sizeX), player_tile_x+ _sizeX) * 8; 
+            if (GetTile(player_tile_x - _sizeX, player_tile_y  ).Collidable)
+                collided.Y = Main.DistanceFrom(GetTilePosX(((x + 0.5f) * 0.125f) + _sizeX), player_tile_x+ _sizeX) * 3; 
+        }
 
-        if (GetTile((x*0.125f), (y*0.125f) + _sizeY).Collidable)
-            collided.W = -Main.DistanceFrom((y*0.125f)+ _sizeY, GetTilePosY(((y + 0.5f) * 0.125f) - _sizeY)) * 8; 
-        if (GetTile((x*0.125f), (y*0.125f) - _sizeY).Collidable)
-            collided.Z = Main.DistanceFrom(GetTilePosY(((y + 0.5f) * 0.125f) + _sizeY), (y*0.125f)+ _sizeY) * 4; 
+
+        if (GetTile(player_tile_x, player_tile_y + _sizeY).Collidable)
+            collided.W = Main.DistanceFrom(GetTilePosY(((y + _sizeY) * 0.125f) - 0.5f), player_tile_y+ _sizeY) * 8; 
+        if (GetTile(player_tile_x, player_tile_y - _sizeY).Collidable)
+            collided.Z = Main.DistanceFrom(GetTilePosY(((y + 0.5f) * 0.125f) + _sizeY), player_tile_y+ _sizeY) * 3; 
 
 
         return collided;

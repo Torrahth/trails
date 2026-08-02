@@ -17,8 +17,8 @@ public class Tile
     //public Texture2D texture;
     public Tile(int x, int y, int sizex=8, int sizey=8, bool collidable=true)
     {
-        texture_bounds.X = x * 8;//((x * 8) + 1)*4;
-        texture_bounds.Y = y * 8;//((y * 8) + 1)*4;
+        texture_bounds.X = ((x * 8) + 1)*4;
+        texture_bounds.Y = ((y * 8) + 1)*4;
         texture_bounds.Width = sizex;
         texture_bounds.Height = sizey;
         Collidable=collidable;

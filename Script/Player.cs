@@ -166,7 +166,7 @@ public class Player : Entity
     }
     private void Collide()
     {
-        Collisions = Collision.CheckForTileCollisions(Position.X , Position.Y, 6, 6); //Collision.CheckForTileCollisions(Position.X+ Velocity.X, Position.Y+ Velocity.Y, 7, 14);
+        Collisions = Collision.CheckForTileCollisions(Position.X , Position.Y, 6, 14); //Collision.CheckForTileCollisions(Position.X+ Velocity.X, Position.Y+ Velocity.Y, 7, 14);
 
         if (Collisions.X != 0 || Collisions.Y != 0)
         {
@@ -174,7 +174,7 @@ public class Player : Entity
             //Console.WriteLine($"{Collisions.X}, {Collisions.Y}");
             // new Vector2((int)Math.Floor(Position.X * 0.125f)+1,(int)Math.Floor(Position.Y * 0.125f)+1)
            //Position.X = OldPosition.X  ;
-            Position.X += Collisions.X;// * 0.01f;
+            Position.X -= Collisions.X;// * 0.01f;
             Position.X += Collisions.Y;///* 0.01f;
             Velocity.X = 0;
         
@@ -183,7 +183,7 @@ public class Player : Entity
         if (Collisions.W != 0 || Collisions.Z != 0)
         {
             //Position.Y = OldPosition.Y;
-            Position.Y += Collisions.W;
+            Position.Y -= Collisions.W;
             Position.Y += Collisions.Z;
             Velocity.Y = 0;
            

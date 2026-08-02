@@ -76,7 +76,7 @@ public class World
                 Vector2 tile = new Vector2(x, y)  * 8;
                 Vector2 position = tile+  ((new Vector2(32, 32)* chunk.GetCoords())*8)-new Vector2(8, 8) ;
 
-                spriteBatch.Draw(texture, (position - Camera.GetPosition()) * camera_zoom +Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin, camera_zoom, rng.Next(0, 2) == 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 1.0f);
+                spriteBatch.Draw(texture, (position - Camera.GetPosition()) * camera_zoom +Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin - new Vector2(4, 4), camera_zoom, rng.Next(0, 2) == 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 1.0f);
                 }
             }
         }
