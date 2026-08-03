@@ -18,6 +18,7 @@ public class World
     public Color sky_color = Color.White;
     public Random rng = new Random();
 
+    private int ran;
     public World(int sizeX, int sizeY, Texture2D new_texture, int World_type)
     {
         chunks = new ChunkingSystem(this);
@@ -69,6 +70,7 @@ public class World
             {
                 for (int y = 0; y < 32; y++)
                 {
+                    ran = rng.Next(0, 2);
                     Vector2 tile = new Vector2(x, y)  * 8;
                     Vector2 position = tile+  ((new Vector2(32, 32)* chunk.GetCoords())*8)-new Vector2(8, 8) ;
 
@@ -82,7 +84,7 @@ public class World
                     Vector2 origin = new Vector2(texture_size.X, texture_size.Y) * 0.5f;
 
                 
-                spriteBatch.Draw(texture, draw_pos+Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin - new Vector2(4, 4), camera_zoom, rng.Next(0, 2) == 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 1.0f);
+                spriteBatch.Draw(texture, draw_pos+Camera.GetHalfViewport(), C_tile.texture_bounds, Color.White, 0, origin - new Vector2(4, 4), camera_zoom, ran==0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 1.0f);
                 }
             }
         }

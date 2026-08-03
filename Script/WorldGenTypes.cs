@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Xna.Framework;
 using TorraFramework.Core;
 
 namespace trails.Script;
@@ -46,69 +47,40 @@ public class WorldGenTypes
         world.sky_color = new Microsoft.Xna.Framework.Color(195, 232, 255);
 
         Random rng = new Random();
-        int slope = (int)(world._sizeY * 0.51f);
-        int mountain_steps = 0;
-        int half_mountain_steps = 0;
-        int mountain_steepness = 0;
+        int size = 80;
+        int i = (size * 2)-(int)(size * 1.5f); // island size times 2, minute island size divided by 2
+        int slope_iteration = 0;
+        int slope =  (int)(world._sizeY * 0.5f);// +(int)(world._sizeY*0.15f);// (int)(world._sizeY * 0.51f);
+
+        float noise1 = (float)rng.Next(-10, 10);
+
         for (int X = 0; X < world._sizeX; ++X)
         {
-       
+            slope_iteration++;
+            if (slope_iteration % 6 == 5)
+            {
+                noise1 =  (float)rng.Next(-5, 5);
+            }
+             slope = (int)MathHelper.Lerp( (int)(Math.Sin((double)i / size) * (size*0.5f)), noise1, 0.15f)+ (int)(world._sizeY * 0.5f) + (int)(size*0.5f);
 
-            if (mountain_steps > 0)
-            {
-                if (mountain_steps < half_mountain_steps)
-                {
-                    if (mountain_steepness > 0)
-                         slope += rng.Next(1, mountain_steepness);
-                    else
-                         slope += rng.Next(mountain_steepness-1, -1);
-                   
-                  
-                }
-                else
-                {
-                    if (mountain_steepness > 0)
-                        slope -= rng.Next(1, mountain_steepness);
-                    else
-                         slope -= rng.Next(mountain_steepness-1, -1);
-                }
-                mountain_steps--; 
-                if (mountain_steps == 0)
-                    half_mountain_steps = 0;
-            }
-            else if (rng.Next(0, 92) == 0 && Main.DistanceFrom((int)(world._sizeX * 0.5f), X) > 100)
-            {
-                mountain_steepness= rng.Next(-4, 4);
-                mountain_steps = mountain_steepness > 0 ? rng.Next(50, 80) : rng.Next(19, 40);
-                half_mountain_steps = (int)(mountain_steps * 0.5f);
-               
-            }
-            else
-            {
-                if (rng.Next(0, 3) == 0)
-                     slope = Math.Clamp(slope + rng.Next(-1, 2), (int)(world._sizeY * 0.6f), (int)(world._sizeY * 0.8f));
+             if (rng.Next(0, 3) == 0)
+                i++;
+              //Math.Clamp(slope + rng.Next(-1, 2)+ (int)(Math.Sin((double)X / 50)) * 50, (int)(world._sizeY * 0.6f), (int)(world._sizeY * 0.8f)) ;
 
      
-            }
 
             for (int Y = 0; Y < world._sizeY; Y++)
             {
-                
-
                 if (Y > slope)
                 {
                     world.SetTile(X, Y, TileID.Tile_dirt);
                 }
-              
-             
-
             }
-            if (rng.Next(0, 55) == 0 && (slope < world._sizeY * 0.65f && slope > world._sizeY * 0.6f))
+            if (rng.Next(0, 55) == 0 && (slope < world._sizeY * 0.65f && slope > world._sizeY * 0.4f))
             { // weird giant trees
                 world.GenerateSeaWeed(X, slope+2 , TileID.Tile_brick, 62, 55, 4, 1, 3) ;
                 world.GenerateFissure(X, slope - 55, new Random(), TileID.Tile_dirt, 50, 6, 6, false, 7);
             }
-          
         }
         for (int X = 0; X < world._sizeX; ++X)
         {

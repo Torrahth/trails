@@ -1,5 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "c:/Users/never/OneDrive/Documents/trails/Content/../Assets/PlayerFerret.png","c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/PlayerFerret.xnb","TextureProcessor","Texture2DContent",207,477,0.48568
 "c:/Users/never/OneDrive/Documents/trails/Content/../Assets/SmallLight.png","c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/SmallLight.xnb","TextureProcessor","Texture2DContent",305,869,0.7545063
-"c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileAtlas.png","c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/TileAtlas.xnb","TextureProcessor","Texture2DContent",2939,49237,0.0457913
+"c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileAtlas.png","c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/TileAtlas.xnb","TextureProcessor","Texture2DContent",3413,68693,0.4732043
 "c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileSelector.png","c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/TileSelector.xnb","TextureProcessor","Texture2DContent",111,341,0.4696411

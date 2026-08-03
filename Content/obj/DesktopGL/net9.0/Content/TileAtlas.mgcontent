@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>c:/Users/never/OneDrive/Documents/trails/Content/../Assets/TileAtlas.png</SourceFile>
-  <SourceTime>2026-08-02T14:09:15.5384421-05:00</SourceTime>
+  <SourceTime>2026-08-03T01:01:13.6043932-05:00</SourceTime>
   <DestFile>c:/Users/never/OneDrive/Documents/trails/Content/bin/DesktopGL/Content/TileAtlas.xnb</DestFile>
-  <DestTime>2026-08-02T14:20:12.7723263-05:00</DestTime>
+  <DestTime>2026-08-03T01:02:17.0704766-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-10-20T09:25:32-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

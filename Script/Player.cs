@@ -227,16 +227,27 @@ public class Player : Entity
         mouse_cursor_t.Position = (new Vector2(player_tile_x-0.5f, player_tile_y-0.5f) - worldhalf) * 8; // + new Vector2(Global.current_world._sizeX, Global.current_world._sizeY) * 0.5f;
         mouse_cursor.Position = mouse_cursor_t.Position;
         //AssetManager.QuickDraw(mouse_cursor_t.Position.X, mouse_cursor_t.Position.Y, AssetManager.LoadTexture("glow", "SmallLight"));
-        if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+        if (Mouse.GetState().LeftButton == ButtonState.Pressed && TouchingPlayer(player_tile_x, player_tile_y, worldhalf) )
         {
             Global.current_world.SetTile(player_tile_x, player_tile_y, tile_type);
             Console.WriteLine($"{(int)worldhalf.X}, {(int)worldhalf.Y}");
          }
-        if (Mouse.GetState().RightButton == ButtonState.Pressed)
+        if (Mouse.GetState().RightButton == ButtonState.Pressed && TouchingPlayer(player_tile_x, player_tile_y, worldhalf) )
         {
              Global.current_world.SetTile(player_tile_x, player_tile_y, TileID.Tile_air);
             Console.WriteLine($"{(int)player_tile_x}, {(int)player_tile_y}");
         }   
+    }
+    private bool TouchingPlayer(int player_tile_x, int player_tile_y, Vector2 worldhalf)
+    {
+        int eX = (int)Math.Ceiling(player_tile.X-0.5f) ;
+        int eY = (int)Math.Ceiling(player_tile.Y-0.5f);
+
+        if (Global.current_world.GetTile(eX, eY).Collidable==true||Global.current_world.GetTile(eX, eY-1).Collidable==true)
+            return false;
+     
+       // AssetManager.QuickDraw(((int)Math.Ceiling(player_tile.X-0.5f) *8)-4f, ((int)Math.Ceiling(player_tile.Y-0.5f)*8)-4f, 8, 8, Color.Aqua);
+        return new Vector2((int)Math.Ceiling(player_tile_x-0.5f), (int)Math.Ceiling(player_tile_y-0.5f)) != player_tile+worldhalf && new Vector2((int)Math.Ceiling(player_tile_x-0.5f), (int)Math.Ceiling(player_tile_y+0.5f)) != player_tile+worldhalf;
     }
     public void Float()
     {

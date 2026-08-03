@@ -61,7 +61,6 @@ public class Game1 : GameCore
             Exit();
 
         Window.Title = "trails" + frame_counter;
-
         base.Update(gameTime);
     }
 

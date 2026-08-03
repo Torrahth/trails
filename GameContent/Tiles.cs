@@ -84,7 +84,7 @@ public class TileBloodOrb : Tile
 }
 public class TileRoseQuartz : Tile
 {
-    public TileRoseQuartz(): base(3, 2)
+    public TileRoseQuartz(): base(1, 2)
     {
         tile_id = 11;
     }
