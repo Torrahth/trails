@@ -47,14 +47,42 @@ public static class Collision
                 collided.Y = Main.DistanceFrom(GetTilePosX(((x+ _sizeX + 0.5f) * 0.125f) ), player_tile_x+ _sizeX) * 3; 
         }
 
-        for (int X = TileSizeX; X > 0; X--)
+   
+        if (GetTile(player_tile_x + _sizeX, player_tile_y + _sizeY).Collidable)
+        {
+            collided.W = Main.DistanceFrom(GetTilePosY(((y + _sizeY- 0.5f) * 0.125f) ), player_tile_y+ _sizeY) * 8; 
+           //  collided.Y = Main.DistanceFrom(GetTilePosX(((x+ _sizeX + 0.5f) * 0.125f) ), player_tile_x+ _sizeX) * 3; 
+                            collided.X = -Main.DistanceFrom(GetTilePosX(((x- _sizeX + 0.5f) * 0.125f) ), player_tile_x+ _sizeX) * 8; 
+        }
+        else
+        {
+         for (int X = TileSizeX; X > 0; X--)
         {        if (GetTile(player_tile_x, player_tile_y + _sizeY).Collidable)
             collided.W = Main.DistanceFrom(GetTilePosY(((y + _sizeY- 0.5f) * 0.125f) ), player_tile_y+ _sizeY) * 8; 
+        }
+
+        }
+
+        if (GetTile(player_tile_x-_sizeX, player_tile_y - _sizeY).Collidable)
+        {
+            collided.Z = Main.DistanceFrom(GetTilePosY(((y + _sizeY+ 0.5f) * 0.125f) ), player_tile_y+ _sizeY) * 3; 
+
+                                        collided.Y = -Main.DistanceFrom(GetTilePosX(((x+ _sizeX + 0.5f) * 0.125f) ), player_tile_x- _sizeX) * 8; 
+
+                           // collided.X = Main.DistanceFrom(GetTilePosX(((x- _sizeX + 0.5f) * 0.125f) ), player_tile_x+ _sizeX) * 8; 
+
+        }
+        else
+        {
+        for (int X = TileSizeX; X > 0; X--)
+        {  
         if (GetTile(player_tile_x, player_tile_y - _sizeY).Collidable)
             collided.Z = Main.DistanceFrom(GetTilePosY(((y + _sizeY+ 0.5f) * 0.125f) ), player_tile_y+ _sizeY) * 3; 
         }
 
+        }
 
+            
         return collided;
     }
     private static Tile GetTile(float x, float y)
