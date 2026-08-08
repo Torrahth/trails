@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
+using trails.Script;
 
 namespace TorraFramework.Core;
 
@@ -15,6 +16,14 @@ public static class GuiManager
         gui_string.Add(name);
         guis.Add(gui);
         return gui;
+    }
+    public static bool AddGui(Gui gui)
+    {
+        if (gui == null)
+            return false;
+        gui_string.Add(gui.ToString());
+        guis.Add(gui);  
+        return true; 
     }
     public static Gui GetGui(string name)
     {
@@ -32,6 +41,15 @@ public static class GuiManager
         int index = gui_string.IndexOf(name);
         Console.WriteLine("Successful Retrieval of:", name);
         return guis[index];
+    }
+    public static void Update(){
+        Main.MouseOverGui = false;
+
+        foreach (Gui gui in guis)
+        {
+            gui.Update();
+        }
+        
     }
     public static void Draw(SpriteBatch spriteBatch)
     {

@@ -6,6 +6,7 @@ namespace TorraFramework.Core;
 
 public static class Main
 {
+    public static bool MouseOverGui { get; set; }
     public static GameWindow Window;
     public static float Golden_ratio = 1.618033988749894f;
     public static Vector2 GetViewportSize()

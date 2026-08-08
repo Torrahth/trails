@@ -49,37 +49,43 @@ public class WorldGenTypes
         Random rng = new Random();
         int size = 80;
         int i = (size * 2)-(int)(size * 1.5f); // island size times 2, minute island size divided by 2
-        int slope_iteration = 0;
         int slope =  (int)(world._sizeY * 0.5f);// +(int)(world._sizeY*0.15f);// (int)(world._sizeY * 0.51f);
 
-        float noise1 = (float)rng.Next(-10, 10);
+        int rock_layer = (int)(world._sizeY * 0.5f);
+        int dirt_layer = (int)(world._sizeY * 0.4f);
+
 
         for (int X = 0; X < world._sizeX; ++X)
         {
-            slope_iteration++;
-            if (slope_iteration % 6 == 5)
-            {
-                noise1 =  (float)rng.Next(-5, 5);
-            }
-             slope = (int)MathHelper.Lerp( (int)(Math.Sin((double)i / size) * (size*0.5f)), noise1, 0.15f)+ (int)(world._sizeY * 0.5f) + (int)(size*0.5f);
+            // slope =  (int)(world._sizeY * 0.5f) + (int)(size*0.5f) ;
 
              if (rng.Next(0, 3) == 0)
-                i++;
+                rock_layer = Math.Clamp(rock_layer+ rng.Next(-1, 2),  (int)(world._sizeY * 0.65f),  (int)(world._sizeY * 0.7f));
+              if (rng.Next(0, 3) == 0)
+                dirt_layer = rock_layer - Math.Clamp(dirt_layer+ rng.Next(-1, 2),  3, 5);
               //Math.Clamp(slope + rng.Next(-1, 2)+ (int)(Math.Sin((double)X / 50)) * 50, (int)(world._sizeY * 0.6f), (int)(world._sizeY * 0.8f)) ;
 
      
 
-            for (int Y = 0; Y < world._sizeY; Y++)
+            for (int Y = world._sizeY; Y >0; Y--) // the more minus the more up
             {
-                if (Y > slope)
+                
+           
+            
+                 if (Y > rock_layer)
+                {
+                    world.SetTile(X, Y, TileID.Stone);
+                }
+                else     if (Y > dirt_layer)
                 {
                     world.SetTile(X, Y, TileID.Tile_dirt);
                 }
+
             }
-            if (rng.Next(0, 55) == 0 && (slope < world._sizeY * 0.65f && slope > world._sizeY * 0.4f))
+            if (rng.Next(0, 55) == 0 && (dirt_layer < world._sizeY * 0.65f && dirt_layer > world._sizeY * 0.4f))
             { // weird giant trees
-                world.GenerateSeaWeed(X, slope+2 , TileID.Tile_brick, 62, 55, 4, 1, 3) ;
-                world.GenerateFissure(X, slope - 55, new Random(), TileID.Tile_dirt, 50, 6, 6, false, 7);
+                world.GenerateSeaWeed(X, dirt_layer+2 , TileID.Tile_brick, 62, 55, 4, 1, 3) ;
+                world.GenerateFissure(X, dirt_layer - 55, new Random(), TileID.Tile_dirt, 50, 6, 6, false, 7);
             }
         }
         for (int X = 0; X < world._sizeX; ++X)

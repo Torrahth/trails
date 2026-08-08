@@ -23,6 +23,21 @@ public class Tile
         texture_bounds.Height = sizey;
         Collidable=collidable;
     }
+    public static Tile ConvertToTile(int x, int y)
+    {
+        Vector2 search = new Vector2(x, y);
+        //TileID.tiles.
+        foreach (Tile tile in TileID.tiles)
+        {
+            //((x * 8) *4)+8
+            Console.WriteLine(new Vector2((int)Math.Floor(tile.texture_bounds.Location.X* 0.125f * 0.25f), (int)Math.Floor(tile.texture_bounds.Location.Y* 0.125f * 0.25f)));
+            if (search == new Vector2((int)Math.Floor(tile.texture_bounds.Location.X* 0.125f * 0.25f), (int)Math.Floor(tile.texture_bounds.Location.Y* 0.125f * 0.25f)))
+            {
+                return tile;
+            }
+        }
+        return TileID.Stone;
+    }
     public void GetTileSize() // b
     {
         Vector2 tile_size = Divide();

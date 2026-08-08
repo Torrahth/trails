@@ -10,7 +10,7 @@ namespace trails.Script;
 public class Player : Entity
 {
     float zoom = 0.0f;
-    Tile tile_type = TileID.Tile_dirt;
+    public Tile tile_type = TileID.Tile_dirt;
     float gravity = 0;
     int max_gravity = 0;
     int max_horizontal = 0;
@@ -31,13 +31,18 @@ public class Player : Entity
 
     Vector2 player_tile = Vector2.Zero;
 
-
+    TileMenu menu = new TileMenu();
     public Player(Texture2D _texture)
     {
+        Global.players.Add(this);
+
         texture = _texture;
         mouse_cursor_t.texture = AssetManager.LoadTexture("Cursor", "TileAtlas");
         mouse_cursor.texture = AssetManager.LoadTexture("Cursor", "TileSelector");
         mouse_cursor_t.color = new Color(100, 100, 100, 100);
+        GuiManager.AddGui(menu);
+
+        //menu.guis[0].Pressed;
 
     }
     public override void Update()
@@ -227,12 +232,12 @@ public class Player : Entity
         mouse_cursor_t.Position = (new Vector2(player_tile_x-0.5f, player_tile_y-0.5f) - worldhalf) * 8; // + new Vector2(Global.current_world._sizeX, Global.current_world._sizeY) * 0.5f;
         mouse_cursor.Position = mouse_cursor_t.Position;
         //AssetManager.QuickDraw(mouse_cursor_t.Position.X, mouse_cursor_t.Position.Y, AssetManager.LoadTexture("glow", "SmallLight"));
-        if (Mouse.GetState().LeftButton == ButtonState.Pressed && TouchingPlayer(player_tile_x, player_tile_y, worldhalf) )
+        if (Mouse.GetState().LeftButton == ButtonState.Pressed && !Main.MouseOverGui && TouchingPlayer(player_tile_x, player_tile_y, worldhalf) )
         {
             Global.current_world.SetTile(player_tile_x, player_tile_y, tile_type);
             Console.WriteLine($"{(int)worldhalf.X}, {(int)worldhalf.Y}");
          }
-        if (Mouse.GetState().RightButton == ButtonState.Pressed && TouchingPlayer(player_tile_x, player_tile_y, worldhalf) )
+        if (Mouse.GetState().RightButton == ButtonState.Pressed && !Main.MouseOverGui && TouchingPlayer(player_tile_x, player_tile_y, worldhalf) )
         {
              Global.current_world.SetTile(player_tile_x, player_tile_y, TileID.Tile_air);
             Console.WriteLine($"{(int)player_tile_x}, {(int)player_tile_y}");
@@ -243,7 +248,7 @@ public class Player : Entity
         int eX = (int)Math.Ceiling(player_tile.X-0.5f) ;
         int eY = (int)Math.Ceiling(player_tile.Y-0.5f);
 
-        if (Global.current_world.GetTile(eX, eY).Collidable==true||Global.current_world.GetTile(eX, eY-1).Collidable==true)
+        if (Global.current_world.GetTile(eX, eY).Collidable==true||Global.current_world.GetTile(eX, eY-1).Collidable==true )
             return false;
      
        // AssetManager.QuickDraw(((int)Math.Ceiling(player_tile.X-0.5f) *8)-4f, ((int)Math.Ceiling(player_tile.Y-0.5f)*8)-4f, 8, 8, Color.Aqua);

@@ -89,3 +89,32 @@ public class TileRoseQuartz : Tile
         tile_id = 11;
     }
 }
+public class TileStone : Tile
+{
+    public TileStone(): base(0, 3)
+    {
+        tile_id = 12;
+    }
+}
+public class TileRedSand : Tile
+{
+    public TileRedSand(): base(1, 3)
+    {
+        tile_id = 13;
+    }
+}
+public class TileSand : Tile
+{
+    public TileSand(): base(2, 3)
+    {
+        tile_id = 14;
+    }
+}
+
+public class TileJungleSoil : Tile
+{
+    public TileJungleSoil(): base(3, 3)
+    {
+        tile_id = 15;
+    }
+}

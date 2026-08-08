@@ -16,7 +16,7 @@ public class Game1 : GameCore
     World world;
     Player player;
 
-    public Game1() : base("didy", 1000, 600)
+    public Game1() : base("Trails", 1000, 600)
     {
         Main.Window = Window;
 
@@ -37,7 +37,6 @@ public class Game1 : GameCore
         string file =  File.ReadAllText($"{AppContext.BaseDirectory}/game-config.json");
         Random rng = new Random();
         AssetManager.Init(Content, GraphicsDevice, _spriteBatch);
-        
         JsonData d = JsonSerializer.Deserialize<JsonData>(file);
 
         world = new World(d.World_size_X *32,d.World_size_Y*32, AssetManager.LoadTexture("TileAtlas", "TileAtlas"), d.World_type); //rng.Next(0, 4)
@@ -57,6 +56,8 @@ public class Game1 : GameCore
 
         player.Update();
         world.Update();
+
+        GuiManager.Update();
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
